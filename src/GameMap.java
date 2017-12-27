@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 public class GameMap {
 
@@ -11,6 +15,31 @@ public class GameMap {
 	public GameMap(int[][] map) {
 		this.map = new int[20][20];
 		loadMap(map);
+	}
+	
+	public void loadMap(String pathname) {
+        try {
+            File filename = new File(pathname); 
+            InputStreamReader reader = new InputStreamReader(  
+                    new FileInputStream(filename));  
+            BufferedReader br = new BufferedReader(reader); 
+            String line = "";  
+            line = br.readLine();
+            int j = 0;
+            for(int i = 0; i < 20; i++) {
+            	this.map[j][i] = Integer.valueOf(line.substring(i, i + 1));
+            }
+            while (j != 19) {  
+            	j++;
+                line = br.readLine(); // 一次读入一行数据  
+                for(int i = 0; i < 20; i++) {
+                	this.map[j][i] = Integer.valueOf(line.substring(i, i + 1));
+                }
+            }  
+            br.close();
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } 
 	}
 	
 	// Load the given map into our GameMap
@@ -37,6 +66,16 @@ public class GameMap {
 	
 	public void setPosition(int[] position, int object) {
 		map[position[0]][position[1]] = object;
+	}
+	
+	public void printMap() {
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				System.out.print(map[i][j]);
+			}
+			System.out.println();
+		}
+		System.out.println("\n");
 	}
 	
 }

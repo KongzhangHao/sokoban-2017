@@ -9,6 +9,9 @@ public class Hero {
 	// Constructor. Initialise position and alive status
 	public Hero(GameMap map) {
 		position = new int[2];
+		position[0] = 10;
+		position[1] = 10;
+		map.setPosition(position, GameObject.player);
 		alive = true;
 		this.map = map;
 		onSlime = false;
@@ -24,28 +27,6 @@ public class Hero {
 	 * update player's position
 	 */
 	public void moveUp() {
-		int[] destination = {position[0], position[1] + 1};
-		if (!movable(destination)) return; 
-		if (onSlime) map.setPosition(position, GameObject.slime);
-		else map.setPosition(position, GameObject.ground);
-		position[1]++;
-		onSlime = false;
-		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
-	}
-	
-	public void moveDown() {
-		int[] destination = {position[0], position[1] - 1};
-		if (!movable(destination)) return; 
-		if (onSlime) map.setPosition(position, GameObject.slime);
-		else map.setPosition(position, GameObject.ground);
-		position[1]--;
-		onSlime = false;
-		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
-	}
-	
-	public void moveLeft() {
 		int[] destination = {position[0] - 1, position[1]};
 		if (!movable(destination)) return; 
 		if (onSlime) map.setPosition(position, GameObject.slime);
@@ -56,12 +37,34 @@ public class Hero {
 		map.setPosition(position, GameObject.player);
 	}
 	
-	public void moveRight() {
-		int[] destination = {position[0] - 1, position[1]};
+	public void moveDown() {
+		int[] destination = {position[0] + 1, position[1]};
 		if (!movable(destination)) return; 
 		if (onSlime) map.setPosition(position, GameObject.slime);
 		else map.setPosition(position, GameObject.ground);
 		position[0]++;
+		onSlime = false;
+		if (map.getPosition(position) == GameObject.slime) onSlime = true;
+		map.setPosition(position, GameObject.player);
+	}
+	
+	public void moveLeft() {
+		int[] destination = {position[0], position[1] - 1};
+		if (!movable(destination)) return; 
+		if (onSlime) map.setPosition(position, GameObject.slime);
+		else map.setPosition(position, GameObject.ground);
+		position[1]--;
+		onSlime = false;
+		if (map.getPosition(position) == GameObject.slime) onSlime = true;
+		map.setPosition(position, GameObject.player);
+	}
+	
+	public void moveRight() {
+		int[] destination = {position[0], position[1] + 1};
+		if (!movable(destination)) return; 
+		if (onSlime) map.setPosition(position, GameObject.slime);
+		else map.setPosition(position, GameObject.ground);
+		position[1]++;
 		onSlime = false;
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
 		map.setPosition(position, GameObject.player);
