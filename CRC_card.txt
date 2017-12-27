@@ -1,0 +1,21 @@
+GameFrame:
+	1. Responsible for displaying the Game current status and map onto the user's
+screen.
+
+Game:
+	1. The engine of the game. 
+	2. Responsible for listening to the user's input and choose the right
+reaction to handle it. 
+	3. Responsible for storing and loading the game status and map.
+	
+
+GameInfo:
+	1. Responsible for storing the Level number, Gameover status
+
+GameMap:
+	1. Responsible for storing the map of the game
+	2. Responsible for keeping updating the map.
+
+Hero:
+	1. Responbile for storing the Hero position, alive status 
+	2. Responsible for moving the hero.
