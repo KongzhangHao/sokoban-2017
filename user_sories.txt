@@ -1,0 +1,12 @@
+1. As a player, I would like to be able to select the game mode and see the
+game instruction at the starting page of the game.
+
+2. As a player, I would like to be able to have a function bar at the rhs of
+the game, where I can choose to restart the level, go to next level, backward
+my move, jump to a level and exit the game.
+
+3. As a player, I want to be able to move my character up, down, left and
+right using my keyboard.
+
+4. As a player, I want the game to be able to store the current state/map of
+the game and display it onto the Frame.
