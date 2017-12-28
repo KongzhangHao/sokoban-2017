@@ -18,14 +18,17 @@ import javax.swing.Timer;
  * @date 28/12/2017 hao: Created GameEngine.
  * 						 Added paint method to paint the map to GUI using the game image.
  * 						 Added KeyListener to listen to user's keyboard input.
+ * 					     Added Jump level and check game status. 
  * 
  */
 public class GameEngine extends JPanel{
 	
-	private GameMap map;
-	private Hero man;
-	private GameImage images;
-	private StatusBar bar;
+	private GameMap map; /**< the current map of the game */
+	private Hero man; /**< the player's hero in */
+	private GameImage images; /**< images to be used in the game */
+	private StatusBar bar; /**< game's status bar */
+	private GameInfo info; /**< game state's information */
+	private int level; /**< current level of the game */
 	
 	/**
 	 * @brief Constructor, initialise information of game
@@ -33,10 +36,12 @@ public class GameEngine extends JPanel{
 	public GameEngine() {
 		this.setBounds(0, 0, 600, 600);
 		this.setVisible(true);
+		level = 1;
 		images = new GameImage();
 		map = new GameMap("maps/1.map");
 		man = new Hero(map);
 		bar = new StatusBar(this);
+		info = new GameInfo();
 	}	
 	
 	/** 
@@ -95,7 +100,33 @@ public class GameEngine extends JPanel{
 				break;
 		}
 		
+		checkGameStatus();
+		
 		/** Repaint the objects onto the panel */
+		repaint();
+	}
+	
+	/**
+	 * @brief Check the current status of the game. If it has ended or passed
+	 */
+	private void checkGameStatus() {
+		/** check if the current level is passed */
+		if (info.isLevelPassed() || map.levelPassed()) {
+			info.setLevelPassed(true);
+			jumpLevel(level + 1);
+		}
+	}
+	
+	
+	/**
+	 * @brief Jump the game to the given level.
+	 */
+	private void jumpLevel(int level) {
+		this.level = level;
+		String path = "maps/" + level + ".map";
+		map.loadMap(path);
+		info.reset();
+		man.reset();
 		repaint();
 	}
 	

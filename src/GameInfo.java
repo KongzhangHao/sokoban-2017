@@ -1,3 +1,4 @@
+import com.sun.org.glassfish.external.statistics.annotations.Reset;
 
 /**
  * @brief Store the general information and data of the game
@@ -13,6 +14,13 @@ public class GameInfo {
 	 * @brief Constructor, initialise the state of the game
 	 */
 	public GameInfo() {
+		reset();
+	}
+	
+	/**
+	 * @brief Reset the game state.
+	 */
+	public void reset() {
 		levelPassed = false;
 	}
 	
@@ -27,9 +35,10 @@ public class GameInfo {
 	
 	/**
 	 * @brief Reset the level passed to be false
+	 * @param passed whether the level is passed
 	 */
-	public void resetLevelPassed() {
-		levelPassed = false;
+	public void setLevelPassed(boolean passed) {
+		levelPassed = passed;
 	}
 	
 	

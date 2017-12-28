@@ -126,4 +126,23 @@ public class GameMap {
 		System.out.println("\n");
 	}
 	
+	/**
+	 * @brief Check if current level is passed
+	 * @return true Current level is passed
+	 * @return false Current level is not passed yet
+	 */
+	public boolean levelPassed() {
+		boolean ret = true;
+		
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				if (map[i][j] == GameObject.slime) {
+					ret = false;
+				}
+			}
+		}
+		
+		return ret;
+	}
+	
 }

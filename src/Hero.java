@@ -1,3 +1,4 @@
+import com.sun.org.glassfish.external.statistics.annotations.Reset;
 
 /**
  * @brief The basic information and behavior of a hero
@@ -23,8 +24,15 @@ public class Hero {
 	 */
 	public Hero(GameMap map) {
 		position = new int[2];
-		alive = true;
 		this.map = map;
+		reset();
+	}
+	
+	/**
+	 * @brief Reset the hero status
+	 */
+	public void reset() {
+		alive = true;
 		onSlime = false;
 		getInitialPosition();
 	}
