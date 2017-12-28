@@ -8,31 +8,53 @@
  */
 public class StatusBar {
 	
+	private GameEngine game; /**< The overall game controller */
+	
+	/**
+	 * @brief Constructor, initialise the status bar.
+	 * @param game the engine of the game
+	 */
 	public StatusBar(GameEngine game) {
-		
+		this.game = game;
 	}
 	
+	/**
+	 * @brief Go back to the previous level
+	 */
 	public void goBack() {
-		
+		game.jumpLevel(game.getLevel() - 1);
 	}
 	
+	/**
+	 * @brief Go to the next level
+	 */
 	public void goNext() {
-		
+		game.jumpLevel(game.getLevel() + 1);
 	}
 
+	/**
+	 * @brief Go back to the previous state of the game
+	 */
 	public void back() {
-	
+		game.getMap().loadBackUp();
+		
+		game.getHero().locateHero();
+		
+		game.repaint();
 	}
 	
+	/**
+	 * @brief Restart the current level
+	 */
 	public void reStart() {
-		
+		game.jumpLevel(game.getLevel());
 	}
 	
+	/**
+	 * @brief Go to the chosen level
+	 */
 	public void choice(int level) {
-		
+		game.jumpLevel(level);
 	}
 	
-	public void setLevel(int level) {
-		
-	}
 }
