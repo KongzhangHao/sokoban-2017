@@ -1,12 +1,19 @@
 
+/**
+ * @brief The basic information and behavior of a hero
+ * @author hao
+ * @file Hero.java
+ * @date 28/12/2017 hao: fixed hero position change of hero movements
+ */
 public class Hero {
 	
-	private int[] position; /**< the x,y position of the hero*/
-	private Boolean alive; /**< if the hero is still alive*/
-	private GameMap map;
-	private Boolean onSlime;
+	private int[] position; /**<the x,y position of the hero*/
+	private Boolean alive; /**<the hero's alive status*/
+	private GameMap map; /**<the current game map*/
+	private Boolean onSlime; /**<store whether the hero is stepping on a slime*/
 	
-	/* Constructor. Initialise position and alive status
+	/**
+	 * @brief Constructor. Initialise position and alive status
 	 * @param map the current map of the game
 	 */
 	public Hero(GameMap map) {
@@ -17,8 +24,9 @@ public class Hero {
 		getInitialPosition();
 	}
 	
-	// Move
-	/*
+	/**
+	 * @brief MOVE HERO
+	 * @Explaination
 	 * check if destination is movable
 	 * change the hero's original position to its original object
 	 * if on slime, then set the position to be slime, else set as ground
@@ -26,8 +34,9 @@ public class Hero {
 	 * set player to the new position
 	 * update player's position
 	 */
-	
-	/* Move the hero up */
+	/**
+	 * @brief Move the hero up
+	 */
 	public void moveUp() {
 		int[] destination = {position[0], position[1] - 1};
 		if (!movable(destination)) return; 
@@ -39,7 +48,9 @@ public class Hero {
 		map.setPosition(position, GameObject.player);
 	}
 	
-	/* Move the hero down */
+	/**
+	 * @brief Move the hero down
+	 */
 	public void moveDown() {
 		int[] destination = {position[0], position[1] + 1};
 		if (!movable(destination)) return; 
@@ -51,7 +62,9 @@ public class Hero {
 		map.setPosition(position, GameObject.player);
 	}
 	
-	/* Move the hero towards left */
+	/**
+	 * @brief Move the hero towards left
+	 */
 	public void moveLeft() {
 		int[] destination = {position[0] - 1, position[1]};
 		if (!movable(destination)) return; 
@@ -63,7 +76,9 @@ public class Hero {
 		map.setPosition(position, GameObject.player);
 	}
 	
-	/* Move the hero towards right */
+	/**
+	 * @brief Move the hero towards right
+	 */
 	public void moveRight() {
 		int[] destination = {position[0] + 1, position[1]};
 		if (!movable(destination)) return; 
@@ -75,11 +90,15 @@ public class Hero {
 		map.setPosition(position, GameObject.player);
 	}
 	
-	// helper function, check if destination movable
-	/*
-	 * if the destination is ground or slime, can go straight away.
-	 * if the destination is dye or dyedSlime, need to check the next step
-	 * if next step is ground or slime, then move the dye to the right place
+	/**
+	 * @brief Check if the destination of the hero is movable 
+	 * @param destination The position that the hero is moving to
+	 * @return true The hero can move towards the destination without 
+	 * 		   any other concerns
+	 * @return false The hero cannot move towards the destination
+	 * @explanation if the destination is ground or slime, can go straight away.
+	 * 			    if the destination is dye or dyedSlime, need to check the next step
+	 * 				if next step is ground or slime, then move the dye to the right place
 	 */
 	private boolean movable(int[] destination) {
 		boolean ret = false;
@@ -110,9 +129,10 @@ public class Hero {
 		return ret;
 	}
 	
-	/*
-	 * Get the initial position from the game map 
-	 * and set the hero's position with it.
+	/**
+	 * @brief Set the initial position of the hero
+	 * @explanation Get the initial position from the game map 
+	 * 				and set the hero's position with it.
 	 */
 	private void getInitialPosition() {
 		for (int i = 0; i < 20; i++) {
@@ -126,15 +146,29 @@ public class Hero {
 		}
 	}
 	
-	/* Setters and Getters */
+	
+	/**
+	 * @brief Get hero's current position
+	 * @return array of hero's position
+	 */
 	public int[] getPosition() {
 		return position;
 	}
 	
+	/**
+	 * @brief Check if hero is still alive
+	 * @return true hero is alive
+	 * @return false hero is dead
+	 */
 	public Boolean isAlive() {
 		return alive;
 	}
 	
+	
+	/**
+	 * @brief Set hero's alive status
+	 * @param alive hero's alive status
+	 */
 	public void setAlive(Boolean alive) {
 		this.alive = alive;	
 	}
