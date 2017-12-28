@@ -35,7 +35,7 @@ public class Hero {
 	public void reset() {
 		alive = true;
 		onSlime = false;
-		getInitialPosition();
+		locateHero();
 	}
 	
 	/**
@@ -180,20 +180,36 @@ public class Hero {
 	}
 	
 	/**
-	 * @brief Set the initial position of the hero
-	 * @explanation Get the initial position from the game map 
-	 * 				and set the hero's position with it.
+	 * @brief Locate the position of the hero from the given 2d array map
+	 * @explanation Get the hero position from the game map 
+	 * 				and set the hero's position using it.
 	 */
-	private void getInitialPosition() {
+	public void locateHero() {
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				if (map.getPosition(i, j) == 5) {
-					position[0] = i;
-					position[1] = j;
+				if (isHero(map.getPosition(i, j))) {
+					setPosition(i, j);
 					return;
 				}
 			}
 		}
+	}
+	
+	/**
+	 * @brief Determine if the object on the position is a hero
+	 * @param object the index of the object
+	 * @return true the object is hero
+	 * @return false the object is not hero
+	 */
+	private boolean isHero(int object) {
+		if (object == GameObject.playerBack
+				|| object == GameObject.playerFront
+				|| object == GameObject.playerLeft
+				|| object == GameObject.playerRight
+			) {
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -221,6 +237,16 @@ public class Hero {
 	 */
 	public void setAlive(Boolean alive) {
 		this.alive = alive;	
+	}
+	
+	/**
+	 * @brief Set hero's position
+	 * @param x position of x axis
+	 * @param y position of y axis
+	 */
+	public void setPosition(int x, int y) {
+		position[0] = x;
+		position[1] = y;
 	}
 	
 }
