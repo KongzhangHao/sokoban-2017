@@ -25,10 +25,10 @@ public class GameEngine extends JPanel{
 	private GameMap map;
 	private Hero man;
 	private GameImage images;
+	private StatusBar bar;
 	
 	/**
-	 * Constructor initialises information of game
-	 * create a new map, two characters and other elements 
+	 * @brief Constructor, initialise information of game
 	 */
 	public GameEngine() {
 		this.setBounds(0, 0, 600, 600);
@@ -36,26 +36,30 @@ public class GameEngine extends JPanel{
 		images = new GameImage();
 		map = new GameMap("maps/1.map");
 		man = new Hero(map);
+		bar = new StatusBar(this);
 	}	
 	
-	/* (non-Javadoc)
+	/** 
+	 * @brief Display the objects from map onto the panel using images.
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
-	 * this method is used to print game map
-	 * also the sentence for showing level or "game over" 
 	 */
 	public void paint(Graphics g) {
 		boolean over=false;
+		
+		/** Display all objects */
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
 				g.drawImage(images.getImg(map.getPosition(i, j)), i * 30, j * 30, this);
 
 			}
 		}
-		//current level
+		
+		/** Display Level number */
 		g.setColor(Color.white);
 		g.setFont(new Font("Garamond", Font.BOLD, 24));
 		g.drawString("Level  " , 50, 50);
-		//if game over, show this in the centre of the screen
+		
+		/** Display GameOver if game has ended */
 		if (over==true) {
 			g.setColor(Color.white);
 			g.setFont(new Font("Garamond", Font.BOLD, 80));
@@ -65,17 +69,15 @@ public class GameEngine extends JPanel{
 		}
 	}
 	
-	// Handle Keyboard inputs
 	/**
-	 * this method is used to detect the pressed key
-	 * and set each key as instruction of
-	 * two characters' movement, skills and "back"
+	 * @brief Detect the pressed key and set each key as instruction of
+	 * characters' movement
 	 * @param e the pressed key
-	 * @Pre game starts, and the pressed key is related to one action
-	 * @Post call the action method
 	 */
 	public void keyReleased(KeyEvent e) {
 		int keycode = e.getKeyCode();
+		
+		/** Choose the right reaction according to the key pressed */
 		switch (keycode) {
 			case KeyEvent.VK_UP:
 				man.moveUp();
@@ -92,7 +94,17 @@ public class GameEngine extends JPanel{
 			default:
 				break;
 		}
+		
+		/** Repaint the objects onto the panel */
 		repaint();
+	}
+	
+	/**
+	 * @brief Get the status bar of the game
+	 * @return Status bar of the game
+	 */
+	public StatusBar getStatusBar() {
+		return bar;
 	}
 
 }

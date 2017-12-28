@@ -3,7 +3,8 @@
  * @brief the enum of difference objects in the game
  * @author hao
  * @file GameObject.java
- * @date 28/12/2017 hao: swapped object values of fire and ground
+ * @date 27/12/2017 hao: Created GameObject.java.
+ * 		 28/12/2017 hao: swapped object values of fire and ground.
  */
 public class GameObject {
 	

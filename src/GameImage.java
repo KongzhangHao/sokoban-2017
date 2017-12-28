@@ -6,8 +6,9 @@ import java.awt.Toolkit;
  * 		  for objects, buttons and status bar.
  * @author hao
  * @file GameImage.java
- * @date 28/12/2017 hao: updated the constructor to load images from the file system.
- * 						 created getImg method to get image.
+ * @date 28/12/2017 hao: Created GameImage.
+ * 						 Updated the constructor to load images from the file system.
+ * 						 Created getImg method to get image.
  */
 public class GameImage {
 	

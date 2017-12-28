@@ -4,6 +4,7 @@
  * @author hao
  * @file StatusBar.java
  * @date 28/12/2017 hao: Created StatusBar.java.
+ *  					 
  */
 public class StatusBar {
 	

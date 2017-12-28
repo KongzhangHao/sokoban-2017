@@ -3,7 +3,11 @@
  * @brief The basic information and behavior of a hero
  * @author hao
  * @file Hero.java
- * @date 28/12/2017 hao: fixed hero position change of hero movements
+ * @date 27/12/2017 hao: Created Hero class.
+ * 						 Added Hero movement to empty ground and slime.
+ * 					     Added Hero movement under condition of dye and dyed slime.
+ * 						 Set initial position of the hero when loading map.
+ * 	     28/12/2017 hao: Fixed hero position change during hero movements.
  */
 public class Hero {
 	

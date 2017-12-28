@@ -7,21 +7,24 @@ import java.io.InputStreamReader;
  * @brief The map representing the current game status
  * @author hao
  * @file GameMap.java
- * @date 28/12/2017 hao: added constructor with file path as parameter
+ * @date 27/12/2017 hao: Created GameMap.
+ * 						 Added loading methods with file path as parameter.
+ * 						 Added setters and getters and method to print map onto STDOUT.
+ * 		 28/12/2017 hao: Added constructor with file path as parameter.
  */
 public class GameMap {
 
-	private int[][] map;
+	private int[][] map; /**<the game map represented by a 2d array. Objects are stored by index*/
 	
 	/**
-	 * Constructor, initialise the game map as 2d array
+	 * @brief Constructor, initialise the game map as 2d array
 	 */
 	public GameMap() {
 		map = new int[20][20];
 	}
 	
 	/**
-	 * Constructor, initialise the game map with the given path
+	 * @brief Constructor, initialise the game map with the given path
 	 * of txt file
 	 * @param pathname the relative path name of the text map file 
 	 */
@@ -32,7 +35,7 @@ public class GameMap {
 	
 	
 	/**
-	 * Load the map from the given pathname's text file
+	 * @brief Load the map from the given pathname's text file
 	 * @param pathname the relative path name of the text map file 
 	 */
 	public void loadMap(String pathname) {
@@ -49,7 +52,7 @@ public class GameMap {
             }
             while (j != 19) {  
             	j++;
-                line = br.readLine(); // 一次读入一行数据  
+                line = br.readLine();
                 for(int i = 0; i < 20; i++) {
                 	this.map[j][i] = Integer.valueOf(line.substring(i, i + 1));
                 }
@@ -61,7 +64,7 @@ public class GameMap {
 	}
 	
 	/**
-	 * Load map from a 2d array representing all elements of the map
+	 * @brief Load map from a 2d array representing all elements of the map
 	 * @param map The 2d array of a existing map
 	 */
 	public void loadMap(int[][] map) {
@@ -73,6 +76,7 @@ public class GameMap {
 	}
 	
 	/**
+	 * @brief Get the object on the quested position as x and y axis
 	 * @param x position at x axis
 	 * @param y position at y axis
 	 * @return the GameObject on the position
@@ -82,6 +86,7 @@ public class GameMap {
 	}
 	
 	/**
+	 * @brief Get the object on the quested position as array
 	 * @param position the position of the quested object
 	 * @return the GameObject on the position
 	 */
@@ -90,6 +95,7 @@ public class GameMap {
 	}
 	
 	/**
+	 * @brief Set the object on a position specified by x and y axis
 	 * @param x position at x axis
 	 * @param y position at y axis
 	 * @param object the GameObject to set on the position
@@ -99,6 +105,7 @@ public class GameMap {
 	}
 	
 	/**
+	 * @brief Set the object on a position specified by an array
 	 * @param position the position of the object to set
 	 * @param object the GameObject to set on the position
 	 */
@@ -107,7 +114,7 @@ public class GameMap {
 	}
 	
 	/**
-	 * Print out the game map as 2d array onto STDOUT
+	 * @brief Print out the game map as 2d array to STDOUT
 	 */
 	public void printMap() {
 		for (int i = 0; i < 20; i++) {
