@@ -8,6 +8,7 @@
  * 					     Added Hero movement under condition of dye and dyed slime.
  * 						 Set initial position of the hero when loading map.
  * 	     28/12/2017 hao: Fixed hero position change during hero movements.
+ * 						 Hero face direction changes when move to a different direction
  */
 public class Hero {
 	
@@ -49,7 +50,7 @@ public class Hero {
 		position[1]--;
 		onSlime = false;
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
+		map.setPosition(position, GameObject.playerBack);
 	}
 	
 	/**
@@ -63,7 +64,7 @@ public class Hero {
 		position[1]++;
 		onSlime = false;
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
+		map.setPosition(position, GameObject.playerFront);
 	}
 	
 	/**
@@ -77,7 +78,7 @@ public class Hero {
 		position[0]--;
 		onSlime = false;
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
+		map.setPosition(position, GameObject.playerLeft);
 	}
 	
 	/**
@@ -91,7 +92,7 @@ public class Hero {
 		position[0]++;
 		onSlime = false;
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.player);
+		map.setPosition(position, GameObject.playerRight);
 	}
 	
 	/**
