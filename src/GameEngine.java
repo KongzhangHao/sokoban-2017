@@ -10,6 +10,8 @@ import java.util.Stack;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import sun.security.action.GetBooleanAction;
+
 /**
  * @brief The game engine used to handle the overall game status and 
  * 	      do reaction to user's behavior.
@@ -28,7 +30,7 @@ public class GameEngine extends JPanel{
 	private GameImage images; /**< images to be used in the game */
 	private StatusBar bar; /**< game's status bar */
 	private GameInfo info; /**< game state's information */
-	private int level; /**< current level of the game */
+	
 	
 	/**
 	 * @brief Constructor, initialise information of game
@@ -36,7 +38,6 @@ public class GameEngine extends JPanel{
 	public GameEngine() {
 		this.setBounds(0, 0, 600, 600);
 		this.setVisible(true);
-		level = 1;
 		images = new GameImage();
 		map = new GameMap("maps/1.map");
 		man = new Hero(map);
@@ -62,7 +63,7 @@ public class GameEngine extends JPanel{
 		/** Display Level number */
 		g.setColor(Color.white);
 		g.setFont(new Font("Garamond", Font.BOLD, 24));
-		g.drawString("Level  " , 50, 50);
+		g.drawString("Level  " + info.getLevel() , 50, 50);
 		
 		/** Display GameOver if game has ended */
 		if (over==true) {
@@ -81,6 +82,8 @@ public class GameEngine extends JPanel{
 	 */
 	public void keyReleased(KeyEvent e) {
 		int keycode = e.getKeyCode();
+		
+		map.backUpMap();
 		
 		/** Choose the right reaction according to the key pressed */
 		switch (keycode) {
@@ -113,20 +116,25 @@ public class GameEngine extends JPanel{
 		/** check if the current level is passed */
 		if (info.isLevelPassed() || map.levelPassed()) {
 			info.setLevelPassed(true);
-			jumpLevel(level + 1);
+			jumpLevel(info.getLevel() + 1);
 		}
 	}
 	
 	
 	/**
 	 * @brief Jump the game to the given level.
+	 * @level the level to jump to
 	 */
-	private void jumpLevel(int level) {
-		this.level = level;
+	public void jumpLevel(int level) {
+		if (level < 1 || level > 15) return;
+		info.setLevel(level);
+		
 		String path = "maps/" + level + ".map";
 		map.loadMap(path);
+		
 		info.reset();
 		man.reset();
+		
 		repaint();
 	}
 	
@@ -138,4 +146,27 @@ public class GameEngine extends JPanel{
 		return bar;
 	}
 
+	/**
+	 * @brief Get the current level of game
+	 * @return level number
+	 */
+	public int getLevel() {
+		return info.getLevel();
+	}
+	
+	/**
+	 * @brief Get the current game map
+	 * @return game map
+	 */
+	public GameMap getMap() {
+		return map;
+	}
+	
+	/**
+	 * @brief Get the hero status
+	 * @return hero
+	 */
+	public Hero getHero() {	
+		return man;
+	}
 }
