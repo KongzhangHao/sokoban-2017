@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
  * @brief The map representing the current game status
  * @author hao
  * @file GameMap.java
- * @date 28/12/2017
+ * @date 28/12/2017 hao: added constructor with file path as parameter
  */
 public class GameMap {
 
