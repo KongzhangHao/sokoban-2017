@@ -10,71 +10,34 @@ import java.util.Stack;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * @brief The game engine used to handle the overall game status and 
+ * 	      do reaction to user's behavior.
+ * @author hao
+ * @file GameEngine.java
+ * @date 28/12/2017 hao: Created GameEngine.
+ * 						 Added paint method to paint the map to GUI using the game image.
+ * 						 Added KeyListener to listen to user's keyboard input.
+ * 
+ */
 public class GameEngine extends JPanel{
 	
 	private GameMap map;
-	private static Image[] imgs = null;
-	private static Toolkit tk = Toolkit.getDefaultToolkit();
 	private Hero man;
+	private GameImage images;
+	
 	/**
-	 * in constructor initializes information of game
+	 * Constructor initialises information of game
 	 * create a new map, two characters and other elements 
-	 * @param level the start level(initial level is 1)
 	 */
 	public GameEngine() {
 		this.setBounds(0, 0, 600, 600);
 		this.setVisible(true);
-		map = new GameMap();
-		map.loadMap("maps/1.map");
-		map.printMap();
+		images = new GameImage();
+		map = new GameMap("maps/1.map");
 		man = new Hero(map);
-		imgs = new Image[] {
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_magma.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/wall.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/floor.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_dye.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/green_slime.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_role_face.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_role_back.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_role_right.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_role_left.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/red_slime.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/pickaxe.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/stairs.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/witch_face.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/witch_left.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/witch_right.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/witch_back.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/fire.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/ice.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/thunder.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/pickaxe_effect.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/ulti.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource(
-						"imgs/kill_slime.gif"))};
-	}
-
+	}	
+	
 	/* (non-Javadoc)
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 * this method is used to print game map
@@ -84,7 +47,7 @@ public class GameEngine extends JPanel{
 		boolean over=false;
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				g.drawImage(imgs[map.getPosition(i, j)], i * 30, j * 30, this);
+				g.drawImage(images.getImg(map.getPosition(i, j)), i * 30, j * 30, this);
 
 			}
 		}
@@ -131,28 +94,5 @@ public class GameEngine extends JPanel{
 		}
 		repaint();
 	}
-	
-	public void goBack() {
-		
-	}
-	
-	public void goNext() {
-		
-	}
 
-	public void back() {
-	
-	}
-	
-	public void reStart() {
-		
-	}
-	
-	public void choice(int level) {
-		
-	}
-	
-	public void setLevel(int level) {
-		
-	}
 }
