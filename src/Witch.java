@@ -12,6 +12,16 @@ public class Witch extends Hero {
 	 */
 	public Witch(GameMap map) {
 		super(map);
+		
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				if (map.getPosition(i, j) == GameObject.ground) {
+					setPosition(i, j);
+					map.setPosition(i, j, frontIndex());
+					return;
+				}
+			}
+		}
 	}
 	
 	/**
