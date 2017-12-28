@@ -56,7 +56,7 @@ public class Hero {
 		
 		/** If not movable, then change the facing direction */
 		if (!movable(destination)) {
-			map.setPosition(position, GameObject.playerBack);
+			map.setPosition(position, backIndex());
 			return; 
 		}
 		
@@ -68,7 +68,7 @@ public class Hero {
 		
 		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.playerBack);
+		map.setPosition(position, backIndex());
 	}
 	
 	/**
@@ -79,7 +79,7 @@ public class Hero {
 		
 		/** If not movable, then change the facing direction */
 		if (!movable(destination)) {
-			map.setPosition(position, GameObject.playerFront);
+			map.setPosition(position, frontIndex());
 			return; 
 		}
 		
@@ -91,7 +91,7 @@ public class Hero {
 		
 		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.playerFront);
+		map.setPosition(position, frontIndex());
 	}
 	
 	/**
@@ -102,7 +102,7 @@ public class Hero {
 		
 		/** If not movable, then change the facing direction */
 		if (!movable(destination)) {
-			map.setPosition(position, GameObject.playerLeft);
+			map.setPosition(position, leftIndex());
 			return; 
 		} 
 		
@@ -114,7 +114,7 @@ public class Hero {
 		
 		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.playerLeft);
+		map.setPosition(position, leftIndex());
 	}
 	
 	/**
@@ -125,7 +125,7 @@ public class Hero {
 		
 		/** If not movable, then change the facing direction */
 		if (!movable(destination)) {
-			map.setPosition(position, GameObject.playerRight);
+			map.setPosition(position, rightIndex());
 			return; 
 		} 
 		
@@ -137,7 +137,7 @@ public class Hero {
 		
 		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
-		map.setPosition(position, GameObject.playerRight);
+		map.setPosition(position, rightIndex());
 	}
 	
 	/**
@@ -202,10 +202,10 @@ public class Hero {
 	 * @return false the object is not hero
 	 */
 	private boolean isHero(int object) {
-		if (object == GameObject.playerBack
-				|| object == GameObject.playerFront
-				|| object == GameObject.playerLeft
-				|| object == GameObject.playerRight
+		if (object == rightIndex()
+				|| object == backIndex()
+				|| object == leftIndex()
+				|| object == frontIndex()
 			) {
 			return true;
 		}
@@ -247,6 +247,38 @@ public class Hero {
 	public void setPosition(int x, int y) {
 		position[0] = x;
 		position[1] = y;
+	}
+	
+	/**
+	 * @brief Get the hero's front image index
+	 * @return front image index
+	 */
+	private int frontIndex() {
+		return GameObject.playerFront;
+	}
+	
+	/**
+	 * @brief Get the hero's back image index
+	 * @return front image index
+	 */
+	private int backIndex() {
+		return GameObject.playerBack;
+	}
+	
+	/**
+	 * @brief Get the hero's left image index
+	 * @return front image index
+	 */
+	private int leftIndex() {
+		return GameObject.playerLeft;
+	}
+	
+	/**
+	 * @brief Get the hero's right image index
+	 * @return front image index
+	 */
+	private int rightIndex() {
+		return GameObject.playerRight;
 	}
 	
 }
