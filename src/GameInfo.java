@@ -9,11 +9,13 @@ import com.sun.org.glassfish.external.statistics.annotations.Reset;
 public class GameInfo {
 	
 	private boolean levelPassed; /**< store if the current level is passed */
+	private int level; /**< current level of the game */
 	
 	/**
 	 * @brief Constructor, initialise the state of the game
 	 */
 	public GameInfo() {
+		setLevel(1);
 		reset();
 	}
 	
@@ -39,6 +41,23 @@ public class GameInfo {
 	 */
 	public void setLevelPassed(boolean passed) {
 		levelPassed = passed;
+	}
+
+	/**
+	 * @brief Get the current game level
+	 * @return level number
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	
+	/**
+	 * @brief Set current game level
+	 * @param level the level number to set
+	 */
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	
