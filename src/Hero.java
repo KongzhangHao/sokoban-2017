@@ -10,6 +10,7 @@ import com.sun.org.glassfish.external.statistics.annotations.Reset;
  * 						 Set initial position of the hero when loading map.
  * 	     28/12/2017 hao: Fixed hero position change during hero movements.
  * 						 Hero face direction changes when move to a different direction
+ * 						 Fixed hero face direction change when the user tries to move to a blocked place
  */
 public class Hero {
 	
@@ -52,11 +53,20 @@ public class Hero {
 	 */
 	public void moveUp() {
 		int[] destination = {position[0], position[1] - 1};
-		if (!movable(destination)) return; 
+		
+		/** If not movable, then change the facing direction */
+		if (!movable(destination)) {
+			map.setPosition(position, GameObject.playerBack);
+			return; 
+		}
+		
+		/** If currently on slime, then set the current position to be a slime */
 		if (onSlime) map.setPosition(position, GameObject.slime);
 		else map.setPosition(position, GameObject.ground);
 		position[1]--;
 		onSlime = false;
+		
+		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
 		map.setPosition(position, GameObject.playerBack);
 	}
@@ -66,11 +76,20 @@ public class Hero {
 	 */
 	public void moveDown() {
 		int[] destination = {position[0], position[1] + 1};
-		if (!movable(destination)) return; 
+		
+		/** If not movable, then change the facing direction */
+		if (!movable(destination)) {
+			map.setPosition(position, GameObject.playerFront);
+			return; 
+		}
+		
+		/** If currently on slime, then set the current position to be a slime */
 		if (onSlime) map.setPosition(position, GameObject.slime);
 		else map.setPosition(position, GameObject.ground);
 		position[1]++;
 		onSlime = false;
+		
+		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
 		map.setPosition(position, GameObject.playerFront);
 	}
@@ -80,11 +99,20 @@ public class Hero {
 	 */
 	public void moveLeft() {
 		int[] destination = {position[0] - 1, position[1]};
-		if (!movable(destination)) return; 
+		
+		/** If not movable, then change the facing direction */
+		if (!movable(destination)) {
+			map.setPosition(position, GameObject.playerLeft);
+			return; 
+		} 
+		
+		/** If currently on slime, then set the current position to be a slime */
 		if (onSlime) map.setPosition(position, GameObject.slime);
 		else map.setPosition(position, GameObject.ground);
 		position[0]--;
 		onSlime = false;
+		
+		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
 		map.setPosition(position, GameObject.playerLeft);
 	}
@@ -94,11 +122,20 @@ public class Hero {
 	 */
 	public void moveRight() {
 		int[] destination = {position[0] + 1, position[1]};
-		if (!movable(destination)) return; 
+		
+		/** If not movable, then change the facing direction */
+		if (!movable(destination)) {
+			map.setPosition(position, GameObject.playerRight);
+			return; 
+		} 
+		
+		/** If currently on slime, then set the current position to be a slime */
 		if (onSlime) map.setPosition(position, GameObject.slime);
 		else map.setPosition(position, GameObject.ground);
 		position[0]++;
 		onSlime = false;
+		
+		/** Set hero to the new position */
 		if (map.getPosition(position) == GameObject.slime) onSlime = true;
 		map.setPosition(position, GameObject.playerRight);
 	}
