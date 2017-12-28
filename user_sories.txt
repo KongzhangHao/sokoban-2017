@@ -1,3 +1,4 @@
+Iteration 1:
 1. As a player, I would like to be able to select the game mode and see the
 game instruction at the starting page of the game.
 
@@ -10,3 +11,9 @@ right using my keyboard.
 
 4. As a player, I want the game to be able to store the current state/map of
 the game and display it onto the Frame.
+
+5. As a player, I want the GUI feature so that the game is more interesting to
+me. 
+
+6. As a player, I want to be able to push the dye to the slime and make the
+slime dyed.
