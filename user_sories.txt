@@ -17,3 +17,7 @@ me.
 
 6. As a player, I want to be able to push the dye to the slime and make the
 slime dyed.
+
+Iteration 2:
+1. As a player, I want to cooperate with my friend and play the game together,
+so that it is more fun.
