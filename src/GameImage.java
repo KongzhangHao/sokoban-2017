@@ -9,6 +9,7 @@ import java.awt.Toolkit;
  * @date 28/12/2017 hao: Created GameImage.
  * 						 Updated the constructor to load images from the file system.
  * 						 Created getImg method to get image.
+ * 	     03/01/2018 hao: Added the image of the Monser
  */
 public class GameImage {
 	
@@ -46,7 +47,8 @@ public class GameImage {
 				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/thunder.gif")),
 				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/pickaxe_effect.gif")),
 				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/ulti.gif")),
-				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/kill_slime.gif"))
+				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/kill_slime.gif")),
+				tk.getImage(GameFrame.class.getClassLoader().getResource("imgs/kulou.gif"))
 		};
 	}
 	

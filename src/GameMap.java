@@ -102,8 +102,6 @@ public class GameMap {
 	 * @return the GameObject on the position
 	 */
 	public int getPosition(int[] position) {
-		System.out.println(position[0]);
-		System.out.println(position[1]);
 		return map[position[0]][position[1]];
 	}
 	

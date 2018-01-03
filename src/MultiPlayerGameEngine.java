@@ -55,6 +55,9 @@ public class MultiPlayerGameEngine extends GameEngine {
 	 * @param keycode The key pressed by the user
 	 */
 	private void checkWarriorMovement(int keycode) {
+		/** check if the hero is still alive */
+		if (!super.getHero().isAlive()) return;
+		
 		/** Choose the right reaction according to the key pressed */
 		switch (keycode) {
 			
@@ -81,6 +84,9 @@ public class MultiPlayerGameEngine extends GameEngine {
 	 * @param keycode The key pressed by the user
 	 */
 	private void checkWitchMovement(int keycode) {
+		/** check if the hero is still alive */
+		if (!woman.isAlive()) return;
+		
 		/** Choose the right reaction according to the key pressed */
 		switch (keycode) {
 			
@@ -127,6 +133,14 @@ public class MultiPlayerGameEngine extends GameEngine {
 		
 		/** locate the witch's position */
 		woman.locateHero();
+	}
+	
+	/**
+	 * @brief Get the player2 hero
+	 * @return the hero status of player2.
+	 */
+	public Hero getHeroine() {
+		return woman;
 	}
 	
 }

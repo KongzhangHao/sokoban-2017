@@ -20,24 +20,6 @@ public class Witch extends Hero {
 	}
 	
 	/**
-	 * @brief Find a empty position for the witch to spawn 
-	 */
-	protected void spawnWitch() {
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 20; j++) {
-				
-				/** if the hero can spawn on this place */
-				if (spawnable(i, j)) {
-					/** set the ground to be the spawning place of the witch */
-					setPosition(i, j);
-					super.getMap().setPosition(i, j, frontIndex());
-					return;
-				}
-			}
-		}
-	}
-	
-	/**
 	 * @brief Check if the hero can spawn on this place
 	 * @param posX the place's x axis
 	 * @param posY the place's y axis
@@ -58,7 +40,18 @@ public class Witch extends Hero {
 	 */
 	@Override
 	public void locateHero() {
-		spawnWitch();
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				
+				/** if the hero can spawn on this place */
+				if (spawnable(i, j)) {
+					/** set the ground to be the spawning place of the witch */
+					setPosition(i, j);
+					super.getMap().setPosition(i, j, frontIndex());
+					return;
+				}
+			}
+		}
 	}
 	
 	/**

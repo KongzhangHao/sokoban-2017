@@ -1,5 +1,3 @@
-import com.sun.org.glassfish.external.statistics.annotations.Reset;
-
 /**
  * @brief The basic information and behavior of a hero
  * @author hao
@@ -15,9 +13,9 @@ import com.sun.org.glassfish.external.statistics.annotations.Reset;
 public class Hero {
 	
 	private int[] position; /**<the x,y position of the hero*/
-	private Boolean alive; /**<the hero's alive status*/
+	private boolean alive; /**<the hero's alive status*/
 	private GameMap map; /**<the current game map*/
-	private Boolean onSlime; /**<store whether the hero is stepping on a slime*/
+	private boolean onSlime; /**<store whether the hero is stepping on a slime*/ 
 	
 	/**
 	 * @brief Constructor. Initialise position and alive status
@@ -150,7 +148,7 @@ public class Hero {
 	 * 			    if the destination is dye or dyedSlime, need to check the next step
 	 * 				if next step is ground or slime, then move the dye to the right place
 	 */
-	private boolean movable(int[] destination) {
+	protected boolean movable(int[] destination) {
 		boolean ret = false;
 		if (map.getPosition(destination) == GameObject.ground 
 				|| map.getPosition(destination) == GameObject.slime) {
@@ -201,7 +199,7 @@ public class Hero {
 	 * @return true the object is hero
 	 * @return false the object is not hero
 	 */
-	private boolean isHero(int object) {
+	protected boolean isHero(int object) {
 		if (object == rightIndex()
 				|| object == backIndex()
 				|| object == leftIndex()

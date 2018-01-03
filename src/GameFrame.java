@@ -8,12 +8,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 /**
  * @brief The starting frame of the game. Handles the displayment of all elements.
@@ -83,7 +87,8 @@ public class GameFrame extends JFrame {
 		jb4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				game = new MultiPlayerGameEngine();
+				//game = new MultiPlayerGameEngine();
+				game = new MonsterGameEngine();
 				startGame();
 				requestFocus();
 			}

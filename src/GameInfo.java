@@ -5,7 +5,7 @@ import com.sun.org.glassfish.external.statistics.annotations.Reset;
  * @author hao
  * @file GameInfo.java
  * @date 28/12/2017 hao: Created GameInfo.java
- */
+ */		 
 public class GameInfo {
 	
 	private boolean levelPassed; /**< store if the current level is passed */
