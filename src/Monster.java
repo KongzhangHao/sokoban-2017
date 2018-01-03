@@ -1,3 +1,4 @@
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -7,15 +8,66 @@ import java.util.ArrayList;
  * @file Monster.java
  * @date 03/01/2018 hao: Created Monster.java
  * 					hao: Added spawning place of monster, with reasonable starting distance from all heroes
+ * 					hao: Added auto movement of the Monster towards the heroes.
  */
 public class Monster extends Witch {
 
+	private GameEngine game; /**< The status of the game engine */
+	
 	/**
 	 * @brief Constructor. Initialise position and alive status
 	 * @param map the current map of the game
 	 */
 	public Monster(GameMap map) {
 		super(map);
+	}
+	
+	/**
+	 * @brief Auto movement of the monster towards the heroes.
+	 */
+	public void autoMove() {
+		/** Get the location of all player heroes */
+		ArrayList<Integer[]> allHeroes = getAllHeroPositions();
+		int shortest = -1;
+		int[] nextPos = null;
+		
+		/** Iterate through all hero positions and find the nearest hero */
+		for(Integer[] hero : allHeroes) {
+			int distance = PathAlgorithm.distanceBetween(getMap(), getPosition(), new int[]{hero[0], hero[1]});
+			if (shortest == -1 || shortest > distance) {
+				shortest = distance;
+				nextPos = PathAlgorithm.nextMove(getMap(), getPosition()[0], getPosition()[1], hero[0], hero[1]);
+			}
+		}
+		
+		/** If no path found towards the nearest hero, then do nothing */
+		if (shortest == -1) return;
+		
+		/** Move towards the nearest hero */
+		if (nextPos[0] - 1 == getPosition()[0]) {
+			moveLeft();
+		} else if (nextPos[0] + 1 == getPosition()[0]) {
+			moveUp();
+		} else if (nextPos[1] + 1 == getPosition()[1]) {
+			moveRight();
+		} else if (nextPos[1] - 1 == getPosition()[1]) {
+			moveDown();
+		}
+	}
+	
+	/**
+	 * @brief Check if the destination of the mosnter is movable 
+	 * @param destination The position that the monster is moving to
+	 * @return true The monster can move towards the destination without 
+	 * 		   any other concerns
+	 * @return false The monster cannot move towards the destination
+	 */
+	@Override
+	protected boolean movable(int[] destination) {
+		/** movable if the destination is a player */
+		if (GameObject.isPlayer(getMap().getPosition(destination))) return true;
+		
+		return super.movable(destination);
 	}
 	
 	/**
@@ -40,7 +92,7 @@ public class Monster extends Witch {
 	 */
 	@Override
 	public void locateHero() {
-		/** Get the location of all play heroes */
+		/** Get the location of all player heroes */
 		ArrayList<Integer[]> allHeroes = getAllHeroPositions();
 		
 		for (int i = 0; i < 20; i++) {
