@@ -253,32 +253,40 @@ public class Hero {
 	 * @brief Get the hero's front image index
 	 * @return front image index
 	 */
-	private int frontIndex() {
-		return GameObject.playerFront;
+	protected int frontIndex() {
+		return 0;
 	}
 	
 	/**
 	 * @brief Get the hero's back image index
 	 * @return front image index
 	 */
-	private int backIndex() {
-		return GameObject.playerBack;
+	protected int backIndex() {
+		return 0;
 	}
 	
 	/**
 	 * @brief Get the hero's left image index
 	 * @return front image index
 	 */
-	private int leftIndex() {
-		return GameObject.playerLeft;
+	protected int leftIndex() {
+		return 0;
 	}
 	
 	/**
 	 * @brief Get the hero's right image index
 	 * @return front image index
 	 */
-	private int rightIndex() {
-		return GameObject.playerRight;
+	protected int rightIndex() {
+		return 0;
+	}
+	
+	/**
+	 * @brief Get the game's map
+	 * @return the game map
+	 */
+	protected GameMap getMap() {
+		return map;
 	}
 	
 }
