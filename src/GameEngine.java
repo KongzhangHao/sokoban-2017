@@ -26,7 +26,7 @@ import sun.security.action.GetBooleanAction;
 public class GameEngine extends JPanel{
 	
 	private GameMap map; /**< the current map of the game */
-	private Hero man; /**< the player's hero in */
+	private Warrior man; /**< the player's hero in */
 	private GameImage images; /**< images to be used in the game */
 	private StatusBar bar; /**< game's status bar */
 	private GameInfo info; /**< game state's information */
@@ -40,7 +40,7 @@ public class GameEngine extends JPanel{
 		this.setVisible(true);
 		images = new GameImage();
 		map = new GameMap("maps/1.map");
-		man = new Hero(map);
+		man = new Warrior(map);
 		bar = new StatusBar(this);
 		info = new GameInfo();
 	}	
@@ -73,6 +73,13 @@ public class GameEngine extends JPanel{
 			g.setFont(new Font("Garamond", Font.BOLD, 80));
 			g.drawString("You DIE!", 130, 320);
 		}
+	}
+	
+	/**
+	 * @brief locate the hero's position from the map
+	 */
+	public void locateHero() {
+		man.locateHero();
 	}
 	
 	/**
@@ -112,7 +119,7 @@ public class GameEngine extends JPanel{
 	/**
 	 * @brief Check the current status of the game. If it has ended or passed
 	 */
-	private void checkGameStatus() {
+	protected void checkGameStatus() {
 		/** check if the current level is passed */
 		if (info.isLevelPassed() || map.levelPassed()) {
 			info.setLevelPassed(true);
