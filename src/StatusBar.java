@@ -4,7 +4,7 @@
  * @author hao
  * @file StatusBar.java
  * @date 28/12/2017 hao: Created StatusBar.java.
- *  					 
+ *  	 03/01/2018 hao: Updated the back track button				 
  */
 public class StatusBar {
 	
@@ -38,7 +38,7 @@ public class StatusBar {
 	public void back() {
 		game.getMap().loadBackUp();
 		
-		game.getHero().locateHero();
+		game.locateHero();
 		
 		game.repaint();
 	}
