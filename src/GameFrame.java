@@ -24,8 +24,7 @@ import javax.swing.JPanel;
  */
 public class GameFrame extends JFrame {
 
-	private int level = 1;
-	private GameEngine game = new GameEngine(); /**<created the game engine*/
+	private GameEngine game; /**< the game engine */
 	private Object[] possibleValues = new Object[50]; /**< possible values for selecting a level*/
 	JPanel jp;
 
@@ -68,6 +67,7 @@ public class GameFrame extends JFrame {
 		jb1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				game = new GameEngine();
 				startGame();
 				requestFocus();
 			}
@@ -83,6 +83,7 @@ public class GameFrame extends JFrame {
 		jb4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				game = new MultiPlayerGameEngine();
 				startGame();
 				requestFocus();
 			}
@@ -309,7 +310,6 @@ public class GameFrame extends JFrame {
 					for (int i = 0; i < 15; i++) {
 						if (selectedValue.toString().equals(possibleValues[i].toString())) {
 							game.getStatusBar().choice(i + 1);
-							game.getStatusBar().setLevel(i+1);
 							break;
 						}
 					}
