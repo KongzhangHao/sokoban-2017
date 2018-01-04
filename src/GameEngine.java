@@ -48,6 +48,7 @@ public class GameEngine extends JPanel{
 	
 	/** 
 	 * @brief Display the objects from 2d map onto the panel using images.
+	 * 		  Display "Game Over" when both heroes are killed by the monster
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
 	public void paint(Graphics g) {
@@ -63,8 +64,26 @@ public class GameEngine extends JPanel{
 		g.setColor(Color.white);
 		g.setFont(new Font("Garamond", Font.BOLD, 24));
 		g.drawString("Level  " + info.getLevel() , 50, 50);
+		
+		/** Display GameOver if game has ended */
+		if (gameOver()) {
+			g.setColor(Color.white);
+			g.setFont(new Font("Garamond", Font.BOLD, 80));
+			g.drawString("Game Over", 80, 220);
+			g.setFont(new Font("Garamond", Font.BOLD, 80));
+			g.drawString("You DIE!", 130, 320);
+		}
 	}
 	
+	/**
+	 * @brief Check if the current game is over. Always false in this case
+	 * @return true current game is over
+	 * @return false current game is not over
+	 */
+	protected boolean gameOver() {
+		return false;
+	}
+
 	/**
 	 * @brief locate the hero's position from the map
 	 */

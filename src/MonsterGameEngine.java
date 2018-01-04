@@ -27,33 +27,14 @@ public class MonsterGameEngine extends MultiPlayerGameEngine {
 		enemy = new Monster(super.getMap());
 	}
 	
-	/** 
-	 * @brief Display the objects from 2d map onto the panel using images.
-	 * 		  Display "Game Over" when both heroes are killed by the monster
-	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
-	 */
-	@Override
-	public void paint(Graphics g) {
-		super.paint(g);
-		
-		/** Display GameOver if game has ended */
-		if (gameOver()) {
-			g.setColor(Color.white);
-			g.setFont(new Font("Garamond", Font.BOLD, 80));
-			g.drawString("Game Over", 80, 220);
-			g.setFont(new Font("Garamond", Font.BOLD, 80));
-			g.drawString("You DIE!", 130, 320);
-		}
-	}
-	
 	/**
 	 * @brief Check if the current game is over. "Over" means that the 
 	 * 		  two heroes are both killed in this case.
 	 * @return true current game is over
 	 * @return false current game is not over
 	 */
+	@Override
 	protected boolean gameOver() {
-		
 		/** If both heroes are killed */
 		if (!super.getHero().isAlive() && !super.getHeroine().isAlive()) return true;
 		return false;

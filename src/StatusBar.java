@@ -4,7 +4,8 @@
  * @author hao
  * @file StatusBar.java
  * @date 28/12/2017 hao: Created StatusBar.java.
- *  	 03/01/2018 hao: Updated the back track button				 
+ *  	 03/01/2018 hao: Updated the back track button	
+ *  	 04/01/2018 hao: Fixed bug: the user can still go back after the game is over			 
  */
 public class StatusBar {
 	
@@ -36,6 +37,9 @@ public class StatusBar {
 	 * @brief Go back to the previous state of the game
 	 */
 	public void back() {
+		/** If the game is over, then do nothing */
+		if (game.gameOver()) return;
+		
 		game.getMap().loadBackUp();
 		
 		game.locateHero();
