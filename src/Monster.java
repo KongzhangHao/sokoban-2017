@@ -9,10 +9,9 @@ import java.util.ArrayList;
  * @date 03/01/2018 hao: Created Monster.java
  * 					hao: Added spawning place of monster, with reasonable starting distance from all heroes
  * 					hao: Added auto movement of the Monster towards the heroes.
+ * 		 04/01/2018 hao: Fixed bug: The monster doesn't move after the first hero is killed
  */
 public class Monster extends Witch {
-
-	private GameEngine game; /**< The status of the game engine */
 	
 	/**
 	 * @brief Constructor. Initialise position and alive status
@@ -24,6 +23,9 @@ public class Monster extends Witch {
 	
 	/**
 	 * @brief Auto movement of the monster towards the heroes.
+	 * @explanation: Get the positions of all heroes
+	 * 				 Using bfs to find the nearest hero with available path
+	 * 			     Move the monster to the right direction according to the found shortest path
 	 */
 	public void autoMove() {
 		/** Get the location of all player heroes */
@@ -31,7 +33,7 @@ public class Monster extends Witch {
 		int shortest = -1;
 		int[] nextPos = null;
 		
-		/** Iterate through all hero positions and find the nearest hero */
+		/** Iterate through all hero positions and find the nearest hero using bfs */
 		for(Integer[] hero : allHeroes) {
 			int distance = PathAlgorithm.distanceBetween(getMap(), getPosition(), new int[]{hero[0], hero[1]});
 			if (shortest == -1 || shortest > distance) {
@@ -43,13 +45,13 @@ public class Monster extends Witch {
 		/** If no path found towards the nearest hero, then do nothing */
 		if (shortest == -1) return;
 		
-		/** Move towards the nearest hero */
+		/** Move towards the nearest hero according to the path found */
 		if (nextPos[0] - 1 == getPosition()[0]) {
-			moveLeft();
-		} else if (nextPos[0] + 1 == getPosition()[0]) {
-			moveUp();
-		} else if (nextPos[1] + 1 == getPosition()[1]) {
 			moveRight();
+		} else if (nextPos[0] + 1 == getPosition()[0]) {
+			moveLeft();
+		} else if (nextPos[1] + 1 == getPosition()[1]) {
+			moveUp();
 		} else if (nextPos[1] - 1 == getPosition()[1]) {
 			moveDown();
 		}
@@ -100,6 +102,7 @@ public class Monster extends Witch {
 				
 				/** if the monster can spawn on this place */
 				if (spawnable(i, j) && isStepsAway(allHeroes, spawnDistanceFromHero(), i, j)) {
+					
 					/** set the ground to be the spawning place of the monster */
 					setPosition(i, j);
 					super.getMap().setPosition(i, j, frontIndex());
@@ -128,7 +131,7 @@ public class Monster extends Witch {
 			for (int j = 0; j < 20; j++) {
 				
 				/** if the object on the position is an hero */
-				if (isPlayer(getMap().getPosition(i, j))) {
+				if (GameObject.isPlayer((getMap().getPosition(i, j)))) {
 					
 					/** Get all players on the map */
 					allHeroes.add(new Integer[]{i, j});
