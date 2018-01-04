@@ -21,13 +21,12 @@ import sun.security.action.GetBooleanAction;
  * 						 Added paint method to paint the map to GUI using the game image.
  * 						 Added KeyListener to listen to user's keyboard input.
  * 					     Added Jump level and check game status. 
- * 
  */
 public class GameEngine extends JPanel{
 	
-	private GameMap map; /**< the current map of the game */
-	private Warrior man; /**< the player's hero in */
-	private GameImage images; /**< images to be used in the game */
+	private GameMap map; /**< the current map of game */
+	private Warrior man; /**< the player's hero in game */
+	private GameImage images; /**< images to be used in game */
 	private StatusBar bar; /**< game's status bar */
 	private GameInfo info; /**< game state's information */
 	
@@ -36,8 +35,10 @@ public class GameEngine extends JPanel{
 	 * @brief Constructor, initialise information of game
 	 */
 	public GameEngine() {
+		
 		this.setBounds(0, 0, 600, 600);
 		this.setVisible(true);
+		
 		images = new GameImage();
 		map = new GameMap("maps/1.map");
 		man = new Warrior(map);
@@ -46,12 +47,10 @@ public class GameEngine extends JPanel{
 	}	
 	
 	/** 
-	 * @brief Display the objects from map onto the panel using images.
+	 * @brief Display the objects from 2d map onto the panel using images.
 	 * @see javax.swing.JComponent#paint(java.awt.Graphics)
 	 */
 	public void paint(Graphics g) {
-		boolean over=false;
-		
 		/** Display all objects */
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
@@ -64,15 +63,6 @@ public class GameEngine extends JPanel{
 		g.setColor(Color.white);
 		g.setFont(new Font("Garamond", Font.BOLD, 24));
 		g.drawString("Level  " + info.getLevel() , 50, 50);
-		
-		/** Display GameOver if game has ended */
-		if (over==true) {
-			g.setColor(Color.white);
-			g.setFont(new Font("Garamond", Font.BOLD, 80));
-			g.drawString("Game Over", 80, 220);
-			g.setFont(new Font("Garamond", Font.BOLD, 80));
-			g.drawString("You DIE!", 130, 320);
-		}
 	}
 	
 	/**
