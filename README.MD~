@@ -8,6 +8,3 @@ Build up the game with basic features. Including hero movement, dye slime, hard 
 
 Iteration 2:
 Multi player mode. The game needs to support two users playing together on one machine.
-
-Iteration 3:
-AI controlled enemy monster. The two player mode needs to have an AI controlled monster which chases after the heroes every step the hero moves.

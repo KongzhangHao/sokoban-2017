@@ -21,7 +21,7 @@ import sun.security.action.GetBooleanAction;
  * 						 Added paint method to paint the map to GUI using the game image.
  * 						 Added KeyListener to listen to user's keyboard input.
  * 					     Added Jump level and check game status. 
- * 		 04/12/2017 hao: Fixed bug: Jumpingto invalid levels create multiple hero characters on map.
+ * 		 04/12/2017 hao: Fixed bug: Jump to invalid levels create multiple hero characters on map.
  * 	    
  */
 public class GameEngine extends JPanel{

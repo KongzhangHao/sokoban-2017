@@ -19,12 +19,3 @@ GameMap:
 Hero:
 	1. Responbile for storing the Hero position, alive status 
 	2. Responsible for moving the hero.
-
-GameImg:
-	1. Responsible for loading the game images which can be used for the
-objects.
-
-StatusBar:
-	1. Responsible for the implementation of the buttons in the status
-bar.
-
