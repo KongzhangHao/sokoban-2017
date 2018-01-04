@@ -80,6 +80,9 @@ public class MonsterGameEngine extends MultiPlayerGameEngine {
 	 */
 	@Override
 	public void jumpLevel(int level) {
+		/** Do nothing if the given level is invalid */
+		if (invalidLevel(level)) return;
+		
 		/** call the parent's jump level */
 		super.jumpLevel(level);
 		

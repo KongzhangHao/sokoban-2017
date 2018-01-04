@@ -21,6 +21,8 @@ import sun.security.action.GetBooleanAction;
  * 						 Added paint method to paint the map to GUI using the game image.
  * 						 Added KeyListener to listen to user's keyboard input.
  * 					     Added Jump level and check game status. 
+ * 		 04/12/2017 hao: Fixed bug: Jumpingto invalid levels create multiple hero characters on map.
+ * 	    
  */
 public class GameEngine extends JPanel{
 	
@@ -142,7 +144,9 @@ public class GameEngine extends JPanel{
 	 * @level the level to jump to
 	 */
 	public void jumpLevel(int level) {
-		if (level < 1 || level > 15) return;
+		/** Do nothing if the given level is invalid */
+		if (invalidLevel(level)) return;
+		
 		info.setLevel(level);
 		
 		String path = "maps/" + level + ".map";
@@ -154,6 +158,17 @@ public class GameEngine extends JPanel{
 		repaint();
 	}
 	
+	/**
+	 * @brief Check if the given level is valid
+	 * @param level the level of game
+	 * @return true The given level is valid
+	 * @return false The given level is invalid
+	 */
+	protected boolean invalidLevel(int level) {
+		if (level < 1 || level > 15) return true;
+		return false;
+	}
+
 	/**
 	 * @brief Get the status bar of the game
 	 * @return Status bar of the game
