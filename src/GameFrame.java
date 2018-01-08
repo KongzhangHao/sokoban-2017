@@ -88,7 +88,7 @@ public class GameFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//game = new MultiPlayerGameEngine();
-				game = new MonsterGameEngine();
+				game = new MonsterGameEngineWithSkill();
 				startGame();
 				requestFocus();
 			}

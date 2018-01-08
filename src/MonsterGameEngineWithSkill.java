@@ -20,6 +20,7 @@ public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 		super();
 		
 		/** Generate all skills to be used in the game */
+		skills = new ArrayList<GameSkill>();
 		generateAllSkills();
 	}
 	
@@ -62,11 +63,11 @@ public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 				break;
 				
 			case KeyEvent.VK_K:
-				
+				skills.get(getWarriorSkill1()).castSkill(getHero().getPosition());
 				break;
 				
 			case KeyEvent.VK_L:
-				
+				skills.get(getWarriorSkill2()).castSkill(getHero().getPosition());
 				break;
 	
 			default:
@@ -81,15 +82,15 @@ public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 	protected void checkWitchSkillPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_Z:
-				
+				skills.get(getWitchSkill0()).castSkill(getHeroine().getPosition());
 				break;
 				
 			case KeyEvent.VK_X:
-				
+				skills.get(getWitchSkill1()).castSkill(getHeroine().getPosition());
 				break;
 				
 			case KeyEvent.VK_C:
-				
+				skills.get(getWitchSkill2()).castSkill(getHeroine().getPosition());
 				break;
 	
 			default:
