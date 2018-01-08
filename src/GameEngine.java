@@ -159,6 +159,16 @@ public class GameEngine extends JPanel{
 	}
 	
 	/**
+	 * @brief Scan through the map to update the heroes' latest alive status
+	 */
+	public void updateAliveStatus() {
+		/** Check if the object on the hero's position is the player */
+		if (!GameObject.isPlayer(getMap().getPosition(man.getPosition()))) {
+			man.setAlive(false);
+		}
+	}
+	
+	/**
 	 * @brief Check if the given level is valid
 	 * @param level the level of game
 	 * @return true The given level is valid
