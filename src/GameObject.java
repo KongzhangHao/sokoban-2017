@@ -8,24 +8,41 @@
  * 					     Added hero's images in four different directions
  * 		 03/01/2018 hao: Added the object Monster
  * 					hao: Added function to check if the object is a player
+ * 		 08/01/2018 hao: Added Hero skill effect images
  */
 public class GameObject {
 	
+	/** Basic game object images*/
 	public static final int wall = 1;
 	public static final int ground = 2;
 	public static final int fire = 0;
-	public static final int warriorFront = 5;
 	public static final int slime = 4;
 	public static final int dye = 3;
 	public static final int dyedSlime = 9;
+	
+	/** Hero Warrior images */
+	public static final int warriorFront = 5;
 	public static final int warriorBack = 6;
 	public static final int warriorLeft = 8;
 	public static final int warriorRight = 7;
+	
+	/** Hero Witch images */
 	public static final int witchRight = 14;
 	public static final int witchFront = 12;
 	public static final int witchBack = 15;
 	public static final int witchLeft = 13;
+	
+	/** Monster image */
 	public static final int monster = 22;
+	
+	/** Skill images */
+	public static final int skillPickaxe = 10;
+	public static final int skillFire = 16;
+	public static final int skillIce = 17;
+	public static final int skillThunder = 18;
+	public static final int skillExplode = 20;
+	public static final int skillSword = 21;
+	
 	
 	public static boolean isPlayer(int object) {
 		if (object == warriorBack || object == warriorFront
