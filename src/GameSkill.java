@@ -1,5 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.security.auth.Destroyable;
 import javax.swing.Timer;
 
 import com.sun.javafx.collections.MappingChange.Map;
@@ -11,6 +13,7 @@ import com.sun.javafx.collections.MappingChange.Map;
  * @date 04/01/2018 hao: created GameSkill.java
  * 					hao: Added flash method to flash the skill on one block using timer
  * 					hao: Fixed Bug: Skill effect remains after the skill is finished
+ * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero
  */
 public class GameSkill {
 
@@ -121,6 +124,7 @@ public class GameSkill {
 					game.getMap().setPosition(posX, posY, afterSkill(prevObject));
 				}
 				
+				game.updateAliveStatus();
 				game.repaint();
 			}
 		};
@@ -134,6 +138,18 @@ public class GameSkill {
 	 * @return the game object after being affected by the skill
 	 */
 	protected int afterSkill(int object) {
+		if (isDestroyable(object)) return GameObject.ground;
 		return object;
+	}
+
+	/**
+	 * @brief Check if the object is destroyable by hero skill
+	 * @param object the game object on the affected position
+	 * @return true the object is destroyable
+	 * @return false the object is not destroyable
+	 */
+	private boolean isDestroyable(int object) {
+		if (object == GameObject.ground || object == GameObject.fire) return false;
+		return true;
 	}
 }
