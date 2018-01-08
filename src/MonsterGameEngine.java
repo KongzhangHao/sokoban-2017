@@ -107,7 +107,8 @@ public class MonsterGameEngine extends MultiPlayerGameEngine {
 	/**
 	 * @brief Scan through the map to update the heroes' latest alive status
 	 */
-	protected void updateAliveStatus() {
+	@Override
+	public void updateAliveStatus() {
 		/** Check if the object on the hero's position is the player */
 		if (!GameObject.isPlayer(getMap().getPosition(super.getHero().getPosition()))) {
 			super.getHero().setAlive(false);
