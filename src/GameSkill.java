@@ -20,7 +20,7 @@ public class GameSkill {
 
 	private int skillImage; /**< The image used in the skill */
 	private GameEngine game; /**< The current state of the game */
-	private int flashRounds; /**< The total number of flashes of the skill */
+	private double flashRounds; /**< The total number of flashes of the skill */
 	private int flashTime; /**< The time that a single flash is lasting for */
 	private int flashNum; /**< The sequence number of current flash */
 	
@@ -31,7 +31,7 @@ public class GameSkill {
 	 * @param flashRounds The total number of flashes of the skill
 	 * @param flashTime The time that a single flash is lasting for
 	 */
-	public GameSkill(GameEngine game, int skillImage, int flashTime, int flashRounds) {
+	public GameSkill(GameEngine game, int skillImage, int flashTime, double flashRounds) {
 		this.skillImage = skillImage;
 		this.game = game;
 		flashNum = 0;
@@ -107,6 +107,33 @@ public class GameSkill {
 		/** Burn the map if a wall beside the fire is broken */
 		if (besideFire(posX, posY)) {
 			burnMap(posX, posY);
+		}
+	}
+
+	/**
+	 * @brief Burn the whole map using fire
+	 * @param posX x axis of starting fire
+	 * @param posY y axis of starting fire
+	 */
+	private void burnMap(int posX, int posY) {
+		boolean burnFinish = false;
+		int burnRadius = 1;
+		double distance = 0;
+		GameSkill burn = new GameSkill(game, GameObject.fire, 1, 0.5);
+		
+		while (!burnFinish) {
+			/** Scan through the map to find the next place to burn */
+			for (int i = 0; i < 20; i++) {
+				for (int j = 0; j < 20; j++) {
+					/** Get the distance from source to current position */
+					distance = Math.sqrt(Math.pow(i - posX, 2) + Math.pow(j - posY, 2));
+					
+					/** Burn the place if it's under burning radius */
+					if(distance <= burnRadius){
+						burn.flash(i, j);
+					}
+				}
+			}
 		}
 	}
 
