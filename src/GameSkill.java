@@ -14,6 +14,7 @@ import com.sun.javafx.collections.MappingChange.Map;
  * 					hao: Added flash method to flash the skill on one block using timer
  * 					hao: Fixed Bug: Skill effect remains after the skill is finished
  * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero
+ * @date 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster
  */
 public class GameSkill {
 
@@ -80,6 +81,10 @@ public class GameSkill {
 	 * @param posY y-axis of skill position
 	 */
 	public void flash(int posX,int posY){
+		/** Kill Monster if on the position */
+		if (GameObject.isMonster(game.getMap().getPosition(posX, posY))) {
+			killCharacter(posX, posY);
+		}
 		
 		/** Get the action to perform in each round of flashing */
 		ActionListener taskPerformer = flashAction(posX, posY);
@@ -90,6 +95,23 @@ public class GameSkill {
 		timer.start();
 	}
 	
+	/**
+	 * @brief Kill the character on the given position
+	 * @param posX x axis of character
+	 * @param posY y axis of character
+	 */
+	protected void killCharacter(int posX, int posY) {
+		/** Store the original object on the position */
+		int originalObject = game.getMap().getPosition(posX, posY);
+		
+		/** Set the place to a trivial object */
+		game.getMap().setPosition(posX, posY, GameObject.ground);
+		
+		/** Update the status of all the characters and set back the object on the position */
+		game.updateAliveStatus();
+		game.getMap().setPosition(posX, posY, originalObject);
+	}
+
 	/**
 	 * @brief Get the action to perform in each round of flashing
 	 * @param posX x axis of the place to flash
