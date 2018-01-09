@@ -104,8 +104,27 @@ public class GameSkill {
 			killCharacter(posX, posY);
 		}
 		
-		/** Burn the map if a wall beside the fire is broken
-		
+		/** Burn the map if a wall beside the fire is broken */
+		if (besideFire(posX, posY)) {
+			burnMap(posX, posY);
+		}
+	}
+
+	/**
+	 * @brief Check if current position is next to fire
+	 * @param posX x axis of checked position
+	 * @param posY y axis of checked position
+	 * @return true the position is next to fire
+	 * @return false the position is not next to fire
+	 */
+	protected boolean besideFire(int posX, int posY) {
+		if (game.getMap().getPosition(posX - 1, posY) == GameObject.fire
+				|| game.getMap().getPosition(posX + 1, posY) == GameObject.fire
+				|| game.getMap().getPosition(posX, posY - 1) == GameObject.fire
+				|| game.getMap().getPosition(posX, posY + 1) == GameObject.fire) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
