@@ -17,6 +17,7 @@ import jdk.internal.dynalink.beans.StaticClass;
  * 					hao: Fixed Bug: Skill effect remains after the skill is finished
  * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero
  * @date 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster
+ * 					hao: Added method burnMap to burn the whole map with fire
  */
 public class GameSkill {
 
@@ -120,9 +121,8 @@ public class GameSkill {
 	 * @param posY y axis of starting fire
 	 */
 	private void burnMap(int posX, int posY) {
-		System.out.println("asdf");
 		/** Set and start the timer to perform the flash action */
-		Timer timer = new Timer(400, burnAction(posX, posY));
+		Timer timer = new Timer(500, burnAction(posX, posY));
 		timer.setRepeats(true);
 		timer.start();
 	}
