@@ -25,6 +25,7 @@ import com.sun.javafx.collections.MappingChange.Map;
  * @file GameFrame.java
  * @date 28/12/2017 hao: Created GameFrame.java.
  * 						 Set the display methods for the game.
+ * 		 09/12/2018 hao: Fixed bug: exception when key released
  */
 public class GameFrame extends JFrame {
 
@@ -358,7 +359,11 @@ public class GameFrame extends JFrame {
 	 */
 	class MyKeyListener extends KeyAdapter {
 		public void keyReleased(KeyEvent e) {
-			game.keyReleased(e);
+			try {
+				game.keyReleased(e);
+			} catch (Exception exce) {
+			
+			}
 		}
 	}
 
