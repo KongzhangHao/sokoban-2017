@@ -81,10 +81,8 @@ public class GameSkill {
 	 * @param posY y-axis of skill position
 	 */
 	public void flash(int posX,int posY){
-		/** Kill Monster if on the position */
-		if (GameObject.isMonster(game.getMap().getPosition(posX, posY))) {
-			killCharacter(posX, posY);
-		}
+		/** Check special condition */
+		checkSpecialCondition(posX, posY);
 		
 		/** Get the action to perform in each round of flashing */
 		ActionListener taskPerformer = flashAction(posX, posY);
@@ -95,6 +93,21 @@ public class GameSkill {
 		timer.start();
 	}
 	
+	/**
+	 * @brief Check special condition on the map when skill is used
+	 * @param posX x axis of skill position
+	 * @param posY y axis of skill position
+	 */
+	protected void checkSpecialCondition(int posX, int posY) {
+		/** Kill Monster if on the position */
+		if (GameObject.isMonster(game.getMap().getPosition(posX, posY))) {
+			killCharacter(posX, posY);
+		}
+		
+		/** Burn the map if a wall beside the fire is broken
+		
+	}
+
 	/**
 	 * @brief Kill the character on the given position
 	 * @param posX x axis of character
