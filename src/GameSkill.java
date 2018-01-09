@@ -6,6 +6,8 @@ import javax.swing.Timer;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
+import jdk.internal.dynalink.beans.StaticClass;
+
 /**
  * @brief The skill that heroes can use, with different purposes and different effects
  * @author hao
@@ -20,9 +22,10 @@ public class GameSkill {
 
 	private int skillImage; /**< The image used in the skill */
 	private GameEngine game; /**< The current state of the game */
-	private double flashRounds; /**< The total number of flashes of the skill */
+	private int flashRounds; /**< The total number of flashes of the skill */
 	private int flashTime; /**< The time that a single flash is lasting for */
 	private int flashNum; /**< The sequence number of current flash */
+	private int burnRadius; /**< The fire radius when the map is burning */
 	
 	/**
 	 * @brief Constructor, defines the behavior and info of the skill
@@ -31,12 +34,13 @@ public class GameSkill {
 	 * @param flashRounds The total number of flashes of the skill
 	 * @param flashTime The time that a single flash is lasting for
 	 */
-	public GameSkill(GameEngine game, int skillImage, int flashTime, double flashRounds) {
+	public GameSkill(GameEngine game, int skillImage, int flashTime, int flashRounds) {
 		this.skillImage = skillImage;
 		this.game = game;
 		flashNum = 0;
 		this.flashRounds = flashRounds;
 		this.flashTime = flashTime;
+		burnRadius = 1;
 	}
 	
 	/**
@@ -116,25 +120,53 @@ public class GameSkill {
 	 * @param posY y axis of starting fire
 	 */
 	private void burnMap(int posX, int posY) {
-		boolean burnFinish = false;
-		int burnRadius = 1;
-		double distance = 0;
-		GameSkill burn = new GameSkill(game, GameObject.fire, 1, 0.5);
+		System.out.println("asdf");
+		/** Set and start the timer to perform the flash action */
+		Timer timer = new Timer(400, burnAction(posX, posY));
+		timer.setRepeats(true);
+		timer.start();
+	}
+
+	/**
+	 * @brief Get the action to perform in each round of burning
+	 * @param posX x axis of starting fire
+	 * @param posY y axis of starting fire
+	 * @return the action to perform in burning
+	 */
+	protected ActionListener burnAction(int posX, int posY) {
 		
-		while (!burnFinish) {
-			/** Scan through the map to find the next place to burn */
-			for (int i = 0; i < 20; i++) {
-				for (int j = 0; j < 20; j++) {
-					/** Get the distance from source to current position */
-					distance = Math.sqrt(Math.pow(i - posX, 2) + Math.pow(j - posY, 2));
+		ActionListener taskPerformer = new ActionListener() {
 					
-					/** Burn the place if it's under burning radius */
-					if(distance <= burnRadius){
-						burn.flash(i, j);
+			public void actionPerformed(ActionEvent e) {
+				
+				/** Stop the fire if it's out of the map bound */
+				if (burnRadius > 20) {
+					burnRadius = 1;
+					Timer timer = (Timer)e.getSource();
+					timer.stop();
+				}
+				
+				/** Scan through the map to find the next place to burn */
+				for (int i = 0; i < 20; i++) {
+					for (int j = 0; j < 20; j++) {
+						
+						/** Get the distance from source to current position */
+						double distance = Math.sqrt(Math.pow(i - posX, 2) + Math.pow(j - posY, 2));
+						
+						/** Burn the place if it's under burning radius */
+						if(distance <= burnRadius){
+							game.getMap().setPosition(i, j, GameObject.fire);
+						}
 					}
 				}
+				
+				burnRadius++;
+				game.updateAliveStatus();
+				game.repaint();
 			}
-		}
+		};
+		
+		return taskPerformer;
 	}
 
 	/**
@@ -145,6 +177,10 @@ public class GameSkill {
 	 * @return false the position is not next to fire
 	 */
 	protected boolean besideFire(int posX, int posY) {
+		/** If current skill is already burning, return false */
+		if (skillImage == GameObject.fire) return false;
+		
+		/** Check the four positions on four directions */
 		if (game.getMap().getPosition(posX - 1, posY) == GameObject.fire
 				|| game.getMap().getPosition(posX + 1, posY) == GameObject.fire
 				|| game.getMap().getPosition(posX, posY - 1) == GameObject.fire
