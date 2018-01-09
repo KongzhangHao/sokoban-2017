@@ -9,6 +9,7 @@
  * 		 03/01/2018 hao: Added the object Monster
  * 					hao: Added function to check if the object is a player
  * 		 08/01/2018 hao: Added Hero skill effect images
+ * 		 09/01/2018 hao: Added method isMonster to check if object on given position is monster
  */
 public class GameObject {
 	
@@ -43,7 +44,12 @@ public class GameObject {
 	public static final int skillExplode = 20;
 	public static final int skillSword = 21;
 	
-	
+	/**
+	 * @brief Check if the object is player
+	 * @param object given object on the position
+	 * @return true object is player
+	 * @return false object is not player
+	 */
 	public static boolean isPlayer(int object) {
 		if (object == warriorBack || object == warriorFront
 			|| object == warriorLeft || object == warriorRight
@@ -52,6 +58,17 @@ public class GameObject {
 			
 			return true;
 		}
+		return false;
+	}
+	
+	/**
+	 * @brief Check if the object is monster
+	 * @param object given object on the position
+	 * @return true object is monster
+	 * @return false object is not monster
+	 */
+	public static boolean isMonster(int object) {
+		if (object == monster) return true;
 		return false;
 	}
 	
