@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * @file MonsterGameEngineWithSkill.java
  * @date 08/01/2018 hao: Created MonsterGameEngineWithSkill.java
  * 		 			hao: Added initialiser of all the skills to be used in the game
+ * 		 09/01/2018 hao: Fixed Bug: Hero skill cannot kill monster
  */
 public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 	
@@ -33,9 +34,9 @@ public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 	public void keyReleased(KeyEvent e) {
 		if (!validKeyPress(e.getKeyCode())) return;
 		
-		super.keyReleased(e);
-		
 		checkSkillPressed(e);
+		
+		super.keyReleased(e);
 		
 		updateAliveStatus();
 	}
@@ -52,6 +53,19 @@ public class MonsterGameEngineWithSkill extends MonsterGameEngine {
 		checkWitchSkillPressed(e);
 	}
 
+	/**
+	 * @brief Scan through the map to update the heroes' latest alive status
+	 */
+	@Override
+	public void updateAliveStatus() {
+		super.updateAliveStatus();
+		
+		/** Check if monster is still alive */
+		if (!GameObject.isMonster(getMap().getPosition(super.getMonster().getPosition()))) {
+			super.getMonster().setAlive(false);
+		}
+	}
+	
 	/**
 	 * @brief Check if the pressed key is controlling the warrior's skill
 	 * @param e the key pressed by the player
