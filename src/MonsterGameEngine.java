@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
  * @date 03/01/2018 hao: Created MonsterGameEngine.java
  * 					hao: Added Monster movement when player moves
  *		 04/01/2018 hao: Display "Game Over" when both heroes are killed by the monster
+ *		 09/01/2018 hao: Added method to get monster object
  */
 public class MonsterGameEngine extends MultiPlayerGameEngine {
 	
@@ -117,5 +118,13 @@ public class MonsterGameEngine extends MultiPlayerGameEngine {
 		if (!GameObject.isPlayer(getMap().getPosition(super.getHeroine().getPosition()))) {
 			super.getHeroine().setAlive(false);
 		}
+	}
+	
+	/**
+	 * @brief Get the monster of the game
+	 * @return monster object
+	 */
+	public Monster getMonster() {
+		return enemy;
 	}
 }
