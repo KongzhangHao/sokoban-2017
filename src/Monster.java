@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * 					hao: Added spawning place of monster, with reasonable starting distance from all heroes
  * 					hao: Added auto movement of the Monster towards the heroes.
  * 		 04/01/2018 hao: Fixed bug: The monster doesn't move after the first hero is killed
+ * 		 09/01/2018 hao: Fixed bug: The monster can still move after being killed
  */
 public class Monster extends Witch {
 	
@@ -28,6 +29,9 @@ public class Monster extends Witch {
 	 * 			     Move the monster to the right direction according to the found shortest path
 	 */
 	public void autoMove() {
+		/** Don't move if the monster has already been killed */
+		if (!isAlive()) return;
+		
 		/** Get the location of all player heroes */
 		ArrayList<Integer[]> allHeroes = getAllHeroPositions();
 		int shortest = -1;
