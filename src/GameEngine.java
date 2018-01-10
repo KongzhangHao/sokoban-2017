@@ -17,10 +17,10 @@ import sun.security.action.GetBooleanAction;
  * 	      do reaction to user's behavior.
  * @author hao
  * @file GameEngine.java
- * @date 28/12/2017 hao: Created GameEngine.
- * 						 Added paint method to paint the map to GUI using the game image.
+ * @date 28/12/2017 hao: Created GameEngine.java.
+ * 						 Added paint method to display the map on GUI using provided images.
  * 						 Added KeyListener to listen to user's keyboard input.
- * 					     Added Jump level and check game status. 
+ * 					     Added method to jump the game to a specific level and refresh all states
  * 		 04/12/2017 hao: Fixed bug: Jump to invalid levels create multiple hero characters on map.
  * 	     10/01/2018 hao: Added music to the game
  */
@@ -152,8 +152,8 @@ public class GameEngine extends JPanel{
 	 * @level the level to jump to
 	 */
 	public void jumpLevel(int level) {
-		/** Do nothing if the given level is invalid */
-		if (invalidLevel(level)) return;
+		/** Do nothing if the given level is invalid or burning hasn't ended */
+		if (invalidLevel(level) || info.isBurning()) return;
 		
 		info.setLevel(level);
 		
@@ -219,5 +219,13 @@ public class GameEngine extends JPanel{
 	 */
 	public Hero getHero() {	
 		return man;
+	}
+	
+	/**
+	 * @brief Get game's info
+	 * @return game's info
+	 */
+	public GameInfo getGameInfo() {
+		return info;
 	}
 }
