@@ -8,11 +8,12 @@ import javax.swing.Timer;
  * @author hao
  * @file GameSkill.java
  * @date 04/01/2018 hao: created GameSkill.java
- * 					hao: Added flash method to flash the skill on one block using timer
- * 					hao: Fixed Bug: Skill effect remains after the skill is finished
- * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero
- * @date 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster
+ * 					hao: Added flash method to temporarily display the skill on one block using timer
+ * 					hao: Fixed Bug: Skill effect remains after the skill has finished
+ * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero's skill
+ * 		 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster using skill
  * 					hao: Added method burnMap to burn the whole map with fire
+ * 		 10/01/2018 hao: Fixed Bug: Jumping to another level while burning doesn't stop the fire
  */
 public class GameSkill {
 
@@ -106,6 +107,8 @@ public class GameSkill {
 		
 		/** Burn the map if a wall beside the fire is broken */
 		if (besideFire(posX, posY)) {
+			game.getGameInfo().startBurning();
+			
 			burnMap(posX, posY);
 		}
 	}
@@ -135,8 +138,11 @@ public class GameSkill {
 			public void actionPerformed(ActionEvent e) {
 				
 				/** Stop the fire if it's out of the map bound */
-				if (burnRadius > 20) {
+				if (game.getMap().allFire()) {
+
+					game.getGameInfo().endBurning();
 					burnRadius = 1;
+					
 					Timer timer = (Timer)e.getSource();
 					timer.stop();
 				}

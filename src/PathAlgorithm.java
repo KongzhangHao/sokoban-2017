@@ -9,7 +9,7 @@ import java.util.Queue;
  * @file Algorithm.java
  * @date 03/01/2018 hao: Created PathAlgorithm.java
  * 				    hao: Created the method of finding shortest distance between two positions on the map.
- * 					hao: Fixed array index out of bound bug when the path found is empty
+ * 					hao: Fixed Bug: array index out of bound when the path found is empty
  */
 public class PathAlgorithm {
 	
