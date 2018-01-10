@@ -7,7 +7,8 @@ import java.awt.event.KeyEvent;
  * @file MultiPlayerGameEngine.java
  * @date 03/01/2018 hao: Created MultiPlayerGameEngine.java
  * 					hao: Added Witch controller with key event
- * 					hao: Updated jump level to reset witch's status
+ * 					hao: Updated jump level which now resets witch's status
+ * 		 10/01/2018 hao: Updated condition check when jumping level
  */
 public class MultiPlayerGameEngine extends GameEngine {
 
@@ -114,8 +115,8 @@ public class MultiPlayerGameEngine extends GameEngine {
 	 */
 	@Override
 	public void jumpLevel(int level) {
-		/** Do nothing if the given level is invalid */
-		if (invalidLevel(level)) return;
+		/** Do nothing if the given level is invalid or burning hasn't ended */
+		if (invalidLevel(level) || getGameInfo().isBurning()) return;
 		
 		/** call the parent's jump level */
 		super.jumpLevel(level);
