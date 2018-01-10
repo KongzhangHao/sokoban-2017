@@ -3,8 +3,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
-import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
-
 /**
  * @brief The map representing the current game status
  * @author hao

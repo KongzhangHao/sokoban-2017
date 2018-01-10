@@ -31,3 +31,10 @@ fight with the monster.
 
 2. As a player, I want my skills to have flashing effects, so the game is more
 interesting.
+
+Iteartion 5:
+1. As a player, I want the game to have background music, which makes it more
+attractive.
+
+2. As a player, I want the game to have special sounds when I move and cast
+skills.

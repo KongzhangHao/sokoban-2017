@@ -1,5 +1,3 @@
-import javafx.scene.Parent;
-
 /**
  * @brief The information and behavior of a Witch
  * @author hao

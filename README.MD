@@ -13,4 +13,7 @@ Iteration 3:
 AI controlled enemy monster. The two player mode needs to have an AI controlled monster which chases after the heroes every step the hero moves.
 
 Iteration 4:
-Hero skills with animations. The heroes need to be given various skills so that they can flight with the monster and also pass difficult levels. 
+Hero skills with animations. The heroes need to be given various skills so that they can flight with the monster and also pass difficult levels.
+
+Iteration 5:
+Game music. The game needs to have different musics with player actions which makes the game more interesting. 

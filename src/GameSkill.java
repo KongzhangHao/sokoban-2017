@@ -1,12 +1,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.security.auth.Destroyable;
 import javax.swing.Timer;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
-import jdk.internal.dynalink.beans.StaticClass;
 
 /**
  * @brief The skill that heroes can use, with different purposes and different effects
