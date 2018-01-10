@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @file GameFrame.java
  * @date 28/12/2017 hao: Created GameFrame.java.
  * 						 Set the display methods for the game.
- * 		 09/12/2018 hao: Fixed bug: exception when key released
+ * 		 09/12/2018 hao: Fixed bug: exception when user gives key board input
  */
 public class GameFrame extends JFrame {
 
@@ -212,9 +212,9 @@ public class GameFrame extends JFrame {
 		lab.setForeground(Color.magenta);
 		lab.setBounds(180,90,20,30);
 		jp1.add(lab);
-		/*
+		
 		//if heroine exists, also show the information like hero
-		if(game.isWomanExist()==true) {
+		if(game instanceof MultiPlayerGameEngine) {
 			//icon
 			img1=new ImageIcon(GameFrame.class.getClassLoader().getResource("imgs/player2.gif"));
 			picLabel = new JLabel(img1);
@@ -249,7 +249,7 @@ public class GameFrame extends JFrame {
 			lab.setForeground(Color.yellow);
 			lab.setBounds(180,230,20,30);
 			jp1.add(lab);
-		}*/
+		}
 		//set order buttons, including change levels, restart and exit
 		//last step button
 		JButton but1=new JButton("");
