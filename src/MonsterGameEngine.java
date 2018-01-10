@@ -5,9 +5,10 @@ import java.awt.event.KeyEvent;
  * @author hao
  * @file MonsterGameEngine.java
  * @date 03/01/2018 hao: Created MonsterGameEngine.java
- * 					hao: Added Monster movement when player moves
+ * 					hao: Added automatic Monster movement when player moves
  *		 04/01/2018 hao: Display "Game Over" when both heroes are killed by the monster
  *		 09/01/2018 hao: Added method to get monster object
+ *		 10/01/2018 hao: Updated condition check when jumping level
  */
 public class MonsterGameEngine extends MultiPlayerGameEngine {
 	
@@ -78,8 +79,8 @@ public class MonsterGameEngine extends MultiPlayerGameEngine {
 	 */
 	@Override
 	public void jumpLevel(int level) {
-		/** Do nothing if the given level is invalid */
-		if (invalidLevel(level)) return;
+		/** Do nothing if the given level is invalid or burning hasn't ended */
+		if (invalidLevel(level) || getGameInfo().isBurning()) return;
 		
 		/** call the parent's jump level */
 		super.jumpLevel(level);
