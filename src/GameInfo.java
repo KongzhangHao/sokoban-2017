@@ -3,11 +3,13 @@
  * @author hao
  * @file GameInfo.java
  * @date 28/12/2017 hao: Created GameInfo.java
+ * 	  	 10/01/2018 hao: Added variable burning to store if the map is currently on fire
  */		 
 public class GameInfo {
 	
 	private boolean levelPassed; /**< store if the current level is passed */
 	private int level; /**< current level of the game */
+	private boolean burning; /**< if the fire is burning on the map */
 	
 	/**
 	 * @brief Constructor, initialise the state of the game
@@ -58,5 +60,26 @@ public class GameInfo {
 		this.level = level;
 	}
 	
+	/**
+	 * @brief Immediately end the burning of the map
+	 */
+	public void endBurning() {
+		burning = false;
+	}
 	
+	/**
+	 * @brief Start the burning of the map
+	 */
+	public void startBurning() {
+		burning = true;
+	}
+	
+	/**
+	 * @brief Check if the map is burning
+	 * @return true The map is burning
+	 * @return false The map is not burning
+	 */
+	public boolean isBurning() {
+		return burning;
+	}
 }
