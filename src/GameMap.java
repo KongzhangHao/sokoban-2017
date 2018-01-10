@@ -7,11 +7,12 @@ import java.io.InputStreamReader;
  * @brief The map representing the current game status
  * @author hao
  * @file GameMap.java
- * @date 27/12/2017 hao: Created GameMap.
- * 						 Added loading methods with file path as parameter.
- * 						 Added setters and getters and method to print map onto STDOUT.
+ * @date 27/12/2017 hao: Created GameMap.java
+ * 						 Added methods to load map with file path given as parameter.
+ * 						 Added method to print map onto STDOUT for debugging.
  * 		 28/12/2017 hao: Added constructor with file path as parameter.
- * 						 Added a backUp which stores the previous state of the map. Used for backtrack.
+ * 						 Added a backUp feature which stores the previous state of the map. Used for backtracking.
+ *		 10/01/2018 hao: Added method to check if the map is totally covered by fire
  */
 public class GameMap {
 
@@ -175,6 +176,25 @@ public class GameMap {
 		
 		map = prevMap;
 		prevMap = null;
+	}
+	
+	/**
+	 * @brief Check if the map is totally covered by fire
+	 * @return true map is totally covered by fire
+	 * @return false there is still place on map which is not fire
+	 */
+	public boolean allFire() {
+		boolean ret = true;
+		
+		/** scan the map to check if any place is not fire */
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				
+				if (getPosition(i, j) != GameObject.fire) ret = false;
+			}
+		}
+		
+		return ret;
 	}
 	
 }
