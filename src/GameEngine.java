@@ -22,7 +22,7 @@ import sun.security.action.GetBooleanAction;
  * 						 Added KeyListener to listen to user's keyboard input.
  * 					     Added Jump level and check game status. 
  * 		 04/12/2017 hao: Fixed bug: Jump to invalid levels create multiple hero characters on map.
- * 	    
+ * 	     10/01/2018 hao: Added music to the game
  */
 public class GameEngine extends JPanel{
 	
@@ -31,6 +31,7 @@ public class GameEngine extends JPanel{
 	private GameImage images; /**< images to be used in game */
 	private StatusBar bar; /**< game's status bar */
 	private GameInfo info; /**< game state's information */
+	private GameMusic music; /**< game music player */
 	
 	
 	/**
@@ -46,6 +47,10 @@ public class GameEngine extends JPanel{
 		man = new Warrior(map);
 		bar = new StatusBar(this);
 		info = new GameInfo();
+		music = new GameMusic("res/bg_quieter.wav", "res/game_over.wav");
+		
+		/** Start playing the bg music */
+		music.playBGM();
 	}	
 	
 	/** 
@@ -74,6 +79,9 @@ public class GameEngine extends JPanel{
 			g.drawString("Game Over", 80, 220);
 			g.setFont(new Font("Garamond", Font.BOLD, 80));
 			g.drawString("You DIE!", 130, 320);
+			
+			/** Start playing game over music */
+			music.playGameOverMusic();
 		}
 	}
 	
@@ -154,6 +162,8 @@ public class GameEngine extends JPanel{
 		
 		info.reset();
 		man.reset();
+		
+		music.playBGM();
 		
 		repaint();
 	}
