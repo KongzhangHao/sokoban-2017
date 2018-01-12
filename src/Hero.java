@@ -2,13 +2,13 @@
  * @brief The basic information and behavior of a hero
  * @author hao
  * @file Hero.java
- * @date 27/12/2017 hao: Created Hero class.
- * 						 Added Hero movement to empty ground and slime.
- * 					     Added Hero movement under condition of dye and dyed slime.
+ * @date 27/12/2017 hao: Created Hero.java
+ * 						 Added Hero movement on empty ground and towards slime.
+ * 					     Updated Hero movement when moving towards dye and dyed slime.
  * 						 Set initial position of the hero when loading map.
- * 	     28/12/2017 hao: Fixed hero position change during hero movements.
- * 						 Hero face direction changes when move to a different direction
- * 						 Fixed hero face direction change when the user tries to move to a blocked place
+ * 	     28/12/2017 hao: Hero position change during hero movements.
+ * 						 Hero facing direction changes when moving to a different direction
+ * 						 Fixed Bug: hero facing direction remains the same when user tries to move to a blocked place
  */
 public class Hero {
 	
@@ -187,6 +187,7 @@ public class Hero {
 			for (int j = 0; j < 20; j++) {
 				if (isHero(map.getPosition(i, j))) {
 					setPosition(i, j);
+					alive = true;
 					return;
 				}
 			}

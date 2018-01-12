@@ -3,9 +3,9 @@
  * @author hao
  * @file Witch.java
  * @date 28/12/17 hao: Created Witch.java
- * 					   Changed the constructor, which picks a spawning position for the witch
- * 					   Updated the locate hero method, automatically find a new place for the witch in every new game.
- * 				
+ * 					   Updated constructor, which picks a suitable spawning position for the witch
+ * 					   Updated locate hero method, automatically find a new place for the witch in every new game.
+ * 		 11/01/18 hao: Fixed Bug: Back Step function creates multiple Witch model on map
  */
 public class Witch extends Hero {
 
@@ -38,9 +38,25 @@ public class Witch extends Hero {
 	 */
 	@Override
 	public void locateHero() {
+		/** Check if witch already exists on the map */
 		for (int i = 0; i < 20; i++) {
 			for (int j = 0; j < 20; j++) {
-				
+				/** if the place is witch */
+				if (isHero(getMap().getPosition(i, j))) {
+					/** set place to be witch's position */
+					setPosition(i, j);
+					setAlive(true);
+					return;
+				}
+			}
+		}
+		
+		/** Check if the hero is still alive */
+		if (!isAlive()) return;
+		
+		/** Find a place where the witch is spawnable */
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
 				/** if the hero can spawn on this place */
 				if (spawnable(i, j)) {
 					/** set the ground to be the spawning place of the witch */
@@ -83,5 +99,5 @@ public class Witch extends Hero {
 	protected int rightIndex() {
 		return GameObject.witchRight;
 	}
-
+	
 }
