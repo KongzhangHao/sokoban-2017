@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * 					hao: Added auto movement of the Monster towards the heroes.
  * 		 04/01/2018 hao: Fixed bug: The monster doesn't move after the first hero is killed
  * 		 09/01/2018 hao: Fixed bug: The monster can still move after being killed
+ * 		 11/01/2018 hao: Fixed Bug: Back Step function creates multiple Monster model on map
  */
 public class Monster extends Witch {
 	
@@ -97,6 +98,22 @@ public class Monster extends Witch {
 	 */
 	@Override
 	public void locateHero() {
+		/** Check if monster already exists on the map */
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				/** if the place is monster */
+				if (isHero(getMap().getPosition(i, j))) {
+					/** set place to be monster's position */
+					setPosition(i, j);
+					setAlive(true);
+					return;
+				}
+			}
+		}
+		
+		/** Check if the monster is still alive */
+		if (!isAlive()) return;
+		
 		/** Get the location of all player heroes */
 		ArrayList<Integer[]> allHeroes = getAllHeroPositions();
 		
