@@ -10,7 +10,7 @@ import javax.swing.Timer;
  * @date 04/01/2018 hao: created GameSkill.java
  * 					hao: Added flash method to temporarily display the skill on one block using timer
  * 					hao: Fixed Bug: Skill effect remains after the skill has finished
- * @date 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero's skill
+ * 		 08/01/2018 hao: Fixed Bug: Hero cannot be killed by another hero's skill
  * 		 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster using skill
  * 					hao: Added method burnMap to burn the whole map with fire
  * 		 10/01/2018 hao: Fixed Bug: Jumping to another level while burning doesn't stop the fire
@@ -23,6 +23,7 @@ public class GameSkill {
 	private int flashTime; /**< The time that a single flash is lasting for */
 	private int flashNum; /**< The sequence number of current flash */
 	private int burnRadius; /**< The fire radius when the map is burning */
+	private int numberLeft; /** The number of times the skill can be casted */
 	
 	/**
 	 * @brief Constructor, defines the behavior and info of the skill
@@ -38,6 +39,7 @@ public class GameSkill {
 		this.flashRounds = flashRounds;
 		this.flashTime = flashTime;
 		burnRadius = 1;
+		numberLeft = 3;
 	}
 	
 	/**
