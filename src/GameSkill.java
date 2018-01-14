@@ -14,6 +14,7 @@ import javax.swing.Timer;
  * 		 09/01/2018 hao: Fixed Bug: Hero cannot kill the monster using skill
  * 					hao: Added method burnMap to burn the whole map with fire
  * 		 10/01/2018 hao: Fixed Bug: Jumping to another level while burning doesn't stop the fire
+ * 		 14/01/2018 hao: Added limitation to the skills. A skill can only be used for once during the whole game.
  */
 public class GameSkill {
 
@@ -23,7 +24,7 @@ public class GameSkill {
 	private int flashTime; /**< The time that a single flash is lasting for */
 	private int flashNum; /**< The sequence number of current flash */
 	private int burnRadius; /**< The fire radius when the map is burning */
-	private int numberLeft; /** The number of times the skill can be casted */
+	private int numberLeft; /** The number of times the skill can be used */
 	
 	/**
 	 * @brief Constructor, defines the behavior and info of the skill
@@ -39,7 +40,7 @@ public class GameSkill {
 		this.flashRounds = flashRounds;
 		this.flashTime = flashTime;
 		burnRadius = 1;
-		numberLeft = 3;
+		numberLeft = 1;
 	}
 	
 	/**
@@ -62,6 +63,11 @@ public class GameSkill {
 	public void castSkill(int[] heroPosition) {
 		int heroPosX = heroPosition[0];
 		int heroPosY = heroPosition[1];
+		
+		if (numberLeft == 0) return;
+		
+		numberLeft--;
+		
 		if (game.getMap().getPosition(heroPosX, heroPosY) == GameObject.warriorFront
 				|| game.getMap().getPosition(heroPosX, heroPosY) == GameObject.witchFront) {
 			flash(heroPosX, heroPosY + 1);
