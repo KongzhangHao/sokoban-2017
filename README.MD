@@ -1,4 +1,4 @@
-Make a Interesting SOKOBAN game with multi features.
+An Interesting SOKOBAN game with multi features.
 Consistantly given new requirements and features by friends with no coding backgrounds.
 Keep the project maintainable, testable, extendable and easy to use.
 Implement Agile Methodology during the whole process.
